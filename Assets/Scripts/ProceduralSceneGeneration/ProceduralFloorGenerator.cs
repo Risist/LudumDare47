@@ -7,13 +7,9 @@ public class ProceduralFloorGenerator : MonoBehaviour
 {
     [SerializeField] private List<FloorGenerationWidget> _widgets;
 
-    void Awake()
-    {
-        _widgets = GetComponents<FloorGenerationWidget>().ToList();
-    }
-
     public FloorSpecification GenerateFloorSpecification(Vector2Int size)
     {
+        _widgets = GetComponents<FloorGenerationWidget>().Where(c=>c.enabled).ToList();
         var presenceArray = new bool[size.x, size.y];
         var center = size / 2;
 
@@ -24,10 +20,22 @@ public class ProceduralFloorGenerator : MonoBehaviour
                 var offsetPosition = new Vector2Int(x,y) - center;
                 foreach (var widget in _widgets)
                 {
-                    var presence = widget.FloorIsPresent(offsetPosition, size);
-                    if (presence.HasValue)
+                    var outcome = widget.FloorIsPresent(offsetPosition, size);
+                    switch (outcome)
                     {
-                        presenceArray[x, y] = presence.Value;
+                        case FloorGenerationWidget.FloorGenerationOutcome.None:
+                            break;
+                        case FloorGenerationWidget.FloorGenerationOutcome.On:
+                            presenceArray[x, y] = true;
+                            break;
+                        case FloorGenerationWidget.FloorGenerationOutcome.Off:
+                            presenceArray[x, y] = false;
+                            break;
+                        case FloorGenerationWidget.FloorGenerationOutcome.Flip:
+                            presenceArray[x, y] = !presenceArray[x,y];
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
             }

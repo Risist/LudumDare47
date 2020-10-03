@@ -7,15 +7,15 @@ using UnityEngine;
 
 public class SingleWallWidget : WallGenerationWidget
 {
-    [SerializeField] private Vector2 _startPoint;
-    [SerializeField] private Vector2 _endPoint;
+    public Vector2 _startPoint;
+    public Vector2 _endPoint;
 
     public override void AddWalls(WallsSpecification specification, FloorSpecification floorSpecification)
     {
         var size = floorSpecification.Size;
 
-        var start = new Vector2Int(Mathf.RoundToInt(_startPoint.x* size.x), Mathf.RoundToInt(_startPoint.y*size.y));
-        var end = new Vector2Int(Mathf.RoundToInt(_endPoint.x* size.x), Mathf.RoundToInt(_endPoint.y*size.y));
+        var start = ClampCoords(floorSpecification.Size, new Vector2Int(Mathf.RoundToInt(_startPoint.x* size.x), Mathf.RoundToInt(_startPoint.y*size.y)));
+        var end = ClampCoords(floorSpecification.Size, new Vector2Int(Mathf.RoundToInt(_endPoint.x* size.x), Mathf.RoundToInt(_endPoint.y*size.y)));
 
         var points = GetPointsOnLine(start.x, start.y, end.x, end.y).ToList();
 
@@ -58,30 +58,51 @@ public class SingleWallWidget : WallGenerationWidget
         }
     }
 
-    private void TryAddingWall(Vector2Int coords, WallDirection direction, WallsSpecification wallsSpecification, FloorSpecification floorSpecification)
+    private Vector2Int ClampCoords(Vector2Int size, Vector2Int p)
+    {
+        return new Vector2Int(
+            Mathf.Min(size.x-1, Mathf.Max(0, p.x)),
+            Mathf.Min(size.y-1, Mathf.Max(0, p.y))
+            );
+    }
+
+    private void TryAddingWall(Vector2Int coords, WallDirection direction, WallsSpecification wallsSpecification,
+        FloorSpecification floorSpecification)
     {
         Vector2Int additionalCoordOffset;
         switch (direction)
         {
             case WallDirection.Up:
-                additionalCoordOffset = new Vector2Int(0,1);
+                additionalCoordOffset = new Vector2Int(0, 1);
                 break;
             case WallDirection.Down:
-                additionalCoordOffset = new Vector2Int(0,-1);
+                additionalCoordOffset = new Vector2Int(0, -1);
                 break;
             case WallDirection.Left:
-                additionalCoordOffset = new Vector2Int(-1,0);
+                additionalCoordOffset = new Vector2Int(-1, 0);
                 break;
             case WallDirection.Right:
-                additionalCoordOffset = new Vector2Int(1,0);
+                additionalCoordOffset = new Vector2Int(1, 0);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
         }
 
-        if (floorSpecification.FloorPresenceArray[coords.x, coords.y] || (floorSpecification.FloorPresenceArray[coords.x + additionalCoordOffset.x, coords.y+additionalCoordOffset.y]))
+        try
         {
-            wallsSpecification.AddWallDirection(coords, direction);
+            var offsetedCoords = coords + additionalCoordOffset;
+            if (floorSpecification.FloorPresenceArray[coords.x, coords.y] || (
+                offsetedCoords.x >= 0 && offsetedCoords.y >= 0 && offsetedCoords.x < floorSpecification.Size.x &&
+                offsetedCoords.y < floorSpecification.Size.y &&
+                floorSpecification.FloorPresenceArray[offsetedCoords.x, offsetedCoords.y]
+            ))
+            {
+                wallsSpecification.AddWallDirection(coords, direction);
+            }
+        }
+        catch
+        {
+            throw;
         }
     }
 
