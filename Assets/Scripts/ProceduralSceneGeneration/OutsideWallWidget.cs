@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.ProceduralSceneGeneration;
 using UnityEngine;
 
+
 public class OutsideWallWidget : WallGenerationWidget
 {
     public override void AddWalls(WallsSpecification spec, FloorSpecification floorSpecification)
