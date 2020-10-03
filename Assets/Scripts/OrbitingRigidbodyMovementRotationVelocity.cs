@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(InputHolder))]
-public class RigidbodyMovementRotationVelocity : MonoBehaviour
+public class OrbitingRigidbodyMovementRotationVelocity : MonoBehaviour
 {
     public float movementSpeed = 1.0f;
     public float rotationSpeedMax = 30.0f;
@@ -12,6 +12,8 @@ public class RigidbodyMovementRotationVelocity : MonoBehaviour
     public float rotationScale = 0.3f;
     [Range(0, 1)]
     public float rotationDamping;
+
+    [SerializeField] private Transform movementCenter;
     [Space]
     [SerializeField] bool moveToDirection = true;
     [SerializeField] bool rotateToDirection = true;
@@ -62,7 +64,7 @@ public class RigidbodyMovementRotationVelocity : MonoBehaviour
         else if (_inputHolder.atRotation)
             desiredRotation = -Vector2.SignedAngle(_inputHolder.rotationInput, Vector2.up);
         else if (_inputHolder.atMove)
-            desiredRotation = -Vector2.SignedAngle(_inputHolder.positionInput, Vector2.up);
+            desiredRotation = -Vector2.SignedAngle(TransformWorldVectorToOrbitalVector(_inputHolder.positionInput), Vector2.up);
         // else;
 
         float currentRotation = -_body.rotation.eulerAngles.y;
@@ -78,6 +80,28 @@ public class RigidbodyMovementRotationVelocity : MonoBehaviour
 
         float speed = movementSpeed * _body.mass;
         Vector2 force = _inputHolder.positionInput.normalized * speed;
+        force = TransformWorldVectorToOrbitalVector(force);
+
+        _onDrawGizmos = new List<Action>()
+        {
+            ()=>Gizmos.DrawRay(_body.transform.position, force.To3D())
+        };
+
         _body.AddForce(force.To3D());
+    }
+
+    private List<Action> _onDrawGizmos;
+
+    void OnDrawGizmos()
+    {
+        _onDrawGizmos?.ForEach(c=>c.Invoke());
+    }
+
+    private Vector2 TransformWorldVectorToOrbitalVector(Vector2 worldVector)
+    {
+        var bodyDeltaFromCenter = new Vector2(_body.position.x - movementCenter.position.x, _body.position.z - movementCenter.position.z);
+        var currentBodyAngle = Mathf.Atan2(bodyDeltaFromCenter.y, bodyDeltaFromCenter.x)- Mathf.PI/2;
+        worldVector=worldVector.Rotate(currentBodyAngle * Mathf.Rad2Deg);
+        return worldVector;
     }
 }
