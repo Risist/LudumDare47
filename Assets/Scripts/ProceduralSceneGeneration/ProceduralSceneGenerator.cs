@@ -8,6 +8,7 @@ public class ProceduralSceneGenerator : MonoBehaviour
     [SerializeField] private ProceduralFloorGenerator _floorGenerator;
     [SerializeField] private ProceduralFloorInstantiater _floorInstantiater;
     [SerializeField] private ProceduralWallsGenerator _wallsGenerator;
+    [SerializeField] private ProceduralWallsInstantiater _wallsInstantiater;
 
     void Start()
     {
@@ -19,6 +20,8 @@ public class ProceduralSceneGenerator : MonoBehaviour
     {
         var floorSpecification = _floorGenerator.GenerateFloorSpecification(_floorSize);
         _floorInstantiater.InstantiateFloor(floorSpecification, _floorSize);
-        _wallsGenerator.GenerateWalls(floorSpecification);
+        var wallsSpecification = _wallsGenerator.CreateWallsSpecification(floorSpecification);
+
+        _wallsInstantiater.InstantiateWalls( new Vector2Int(floorSpecification.FloorPresenceArray.GetLength(0), floorSpecification.FloorPresenceArray.GetLength(1)), wallsSpecification);
     }
 }

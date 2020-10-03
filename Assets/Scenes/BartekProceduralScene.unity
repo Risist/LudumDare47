@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0dd71c9e0874ced47b82fcd8cc1d2853, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -203,8 +203,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -227,13 +227,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184859005}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.0531926, y: 0.9467266, z: -0.21850958, w: -0.23050563}
+  m_LocalPosition: {x: 10.9, y: 14.8, z: 19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.993002, y: -152.632, z: 0.001}
 --- !u!1 &456423286
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   _floorGenerator: {fileID: 1173803923}
   _floorInstantiater: {fileID: 1173803929}
   _wallsGenerator: {fileID: 692847051}
+  _wallsInstantiater: {fileID: 692847053}
 --- !u!4 &456423288
 Transform:
   m_ObjectHideFlags: 0
@@ -383,6 +384,8 @@ GameObject:
   m_Component:
   - component: {fileID: 692847052}
   - component: {fileID: 692847051}
+  - component: {fileID: 692847053}
+  - component: {fileID: 692847054}
   m_Layer: 0
   m_Name: WallGenerator
   m_TagString: Untagged
@@ -402,9 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55bc69a8875b4a45bcde38365860d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallsParent: {fileID: 39237061}
-  _wallPrefab: {fileID: 6950043010074888079, guid: 1c0f6ae38622d2d43b098b8c10dae887,
-    type: 3}
+  _outsideWallWidgets: []
 --- !u!4 &692847052
 Transform:
   m_ObjectHideFlags: 0
@@ -419,6 +420,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692847053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692847050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a6300c105d499478b6bc0ccd25a575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wallsParent: {fileID: 39237061}
+  _wallPrefab: {fileID: 6950043010074888079, guid: 1c0f6ae38622d2d43b098b8c10dae887,
+    type: 3}
+--- !u!114 &692847054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692847050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093a5f035ca2df4aad2e104e7216739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1173803921
 GameObject:
   m_ObjectHideFlags: 0
