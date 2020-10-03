@@ -10,13 +10,9 @@ namespace Assets.Scripts.ProceduralSceneGeneration
     {
         [SerializeField] private List<WallGenerationWidget> _outsideWallWidgets;
 
-        void Awake()
-        {
-            _outsideWallWidgets = GetComponents<WallGenerationWidget>().ToList();
-        }
-
         public WallsSpecification CreateWallsSpecification(FloorSpecification floorSpecification)
         {
+            _outsideWallWidgets = GetComponents<WallGenerationWidget>().ToList();
             var wallsSpecification = new WallsSpecification(new Vector2Int(floorSpecification.FloorPresenceArray.GetLength(0), floorSpecification.FloorPresenceArray.GetLength(1)));
             _outsideWallWidgets.ForEach(c => c.AddWalls(wallsSpecification, floorSpecification));
             return wallsSpecification;
@@ -53,6 +49,11 @@ namespace Assets.Scripts.ProceduralSceneGeneration
             }
 
             return _walls[coords.x, coords.y];
+        }
+
+        public void EmptyWalls(Vector2Int coords)
+        {
+            _walls[coords.x, coords.y] = null;
         }
     }
 

@@ -4,11 +4,14 @@ using Random = System.Random;
 
 public class RandomGeneratorSingleton : MonoBehaviour
 {
-    private Random _random;
+    private static Random _random;
 
     void Awake()
     {
-        _random = new Random(0);
+        if (_random == null)
+        {
+            _random = new Random(0);
+        }
     }
 
     public int RandomInt(int max)
@@ -16,8 +19,28 @@ public class RandomGeneratorSingleton : MonoBehaviour
         return _random.Next(max);
     }
 
+    public int RandomInt(int min, int max)
+    {
+        return RandomInt(max - min) + min;
+    }
+
     public T RandomElement<T>(List<T> elementsToChooseFrom)
     {
         return elementsToChooseFrom[RandomInt(elementsToChooseFrom.Count)];
+    }
+
+    public bool RandomBool(float trueProbability)
+    {
+        return _random.NextDouble() < trueProbability;
+    }
+
+    public float RandomFloat(float max)
+    {
+        return (float) (_random.NextDouble() * max);
+    }
+
+    public float RandomFloat(float min, float max)
+    {
+        return min + RandomFloat(max - min);
     }
 }
