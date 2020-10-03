@@ -47,7 +47,7 @@ public class RigidbodyMovementRotationVelocity : MonoBehaviour
     public void ApplyExternalRotation(Vector2 externalRotation, float rotationSpeed)
     {
         atExternalRotation = true;
-        desiredRotation = -Vector2.SignedAngle(externalRotation, Vector2.up);
+        desiredRotation = Vector2.SignedAngle(externalRotation, Vector2.up);
 
         float currentRotation = _body.rotation.eulerAngles.y;
         float newRotation = Mathf.LerpAngle(currentRotation, desiredRotation, rotationSpeed);

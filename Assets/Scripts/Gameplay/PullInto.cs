@@ -6,7 +6,7 @@ public class PullInto : MonoBehaviour
     public float force;
     private void OnTriggerStay(Collider other)
     {
-        if (!other.attachedRigidbody)
+        if (!other.attachedRigidbody || other.isTrigger)
             return;
 
         Vector3 into = transform.position - other.attachedRigidbody.position;

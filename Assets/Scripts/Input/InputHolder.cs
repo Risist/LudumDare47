@@ -27,7 +27,7 @@ public class InputHolder : MonoBehaviour
         directionInput = Vector2.zero;
         rotationInput = Vector2.zero;
 
-        //for (int i = 0; i < keys.Length; ++i)
-        //    keys[i] = false;
+        for (int i = 0; i < keys.Length; ++i)
+            keys[i] = false;
     }
 }

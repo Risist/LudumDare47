@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Motor : MonoBehaviour
 {
     public float force;
     public float initialForce;
-    Rigidbody2D rb;
+    [Range(0, 1)] public float forceFallof = 1.0f;
+    float _currentForce;
+    Rigidbody rb;
+
+    private void OnEnable()
+    {
+        _currentForce = force;
+    }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.up * initialForce, ForceMode2D.Force);
+        rb = GetComponentInParent<Rigidbody>();
+        rb.AddForce(transform.forward * initialForce, ForceMode.Force);
     }
     private void FixedUpdate()
     {
-        rb.AddForce(transform.up * force, ForceMode2D.Force);
+        _currentForce *= forceFallof;
+        rb.AddForce(transform.forward * _currentForce, ForceMode.Force);
     }
 }

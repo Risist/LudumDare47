@@ -32,22 +32,22 @@ public class InputControllerMouseKeyboard : InputController
         inputHolder.positionInput.y = Input.GetAxis(positionAxisCodeY);
 
         /// direction
-        /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         var box = GetComponent<BoxCollider>();
 
         if (box && box.Raycast(ray, out hit, float.PositiveInfinity))
         {
             Vector3 v = hit.point;
-            inputHolder.directionInput = new Vector2(v.x - inputHolder.transform.position.x, v.y - inputHolder.transform.position.y);
+            inputHolder.directionInput = new Vector2(v.x - inputHolder.transform.position.x, v.z - inputHolder.transform.position.z);
         }
         else
             Debug.LogWarning("player direction raycast does not hit a collider");
-
+        
         /// keys
-        for (int i = 0; i < inputHolder.keys.Length; ++i)
+        for (int i = 0; i < keyAxisCode.Length; ++i)
         {
             inputHolder.keys[i] = Input.GetButton(keyAxisCode[i]);
-        }*/
+        }
     }
 }
