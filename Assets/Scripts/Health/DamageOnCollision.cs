@@ -12,6 +12,7 @@ public class DamageOnCollision : MonoBehaviour
     public DamageData damageDataOnce;
     public DamageData damageDataContinous;
     public DamageData damageDataEnter;
+    public DamageData damageDataImpact;
 
     Vector2 lastPosition;
     private void FixedUpdate()
@@ -72,11 +73,19 @@ public class DamageOnCollision : MonoBehaviour
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
+        
         if (damagable != null && collision.gameObject.transform.root != transform.root)
         {
-            damagable.DealDamage(damageDataContinous);
+            DamageData damageDataImpactTemp = new DamageData();
+            damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
+            damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
+            damageDataImpactTemp.position = transform.position;
+
+            damagable.DealDamage(damageDataImpactTemp);
+
             if (AttemptToDamage(damagable))
                 damagable.DealDamage(damageDataOnce);
+
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -93,7 +102,12 @@ public class DamageOnCollision : MonoBehaviour
         damageDataOnce.position = transform.position;
         if (damagable != null && collision.gameObject.transform.root != transform.root)
         {
-            damagable.DealDamage(damageDataEnter);
+            DamageData damageDataImpactTemp = new DamageData();
+            damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
+            damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
+            damageDataImpactTemp.position = transform.position;
+
+            damagable.DealDamage(damageDataImpactTemp);
             if (AttemptToDamage(damagable))
                 damagable.DealDamage(damageDataOnce);
         }

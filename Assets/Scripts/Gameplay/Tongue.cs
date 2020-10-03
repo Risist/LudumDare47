@@ -18,5 +18,6 @@ public class Tongue : MonoBehaviour
     {
         var bullet = Instantiate(tongueBullet, tongueSpawnPoint.position, tongueSpawnPoint.rotation);
         bullet.tongueEnd = transform;
+        bullet.parentRigidbody = GetComponentInParent<Rigidbody>();
     }
 }

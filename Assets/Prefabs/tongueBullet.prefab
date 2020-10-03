@@ -142,7 +142,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &744514373868918700
 MonoBehaviour:
@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882c0fcbd5a33bd42b3f4d063fef5793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pullForceScale: 3
   tongueEnd: {fileID: 0}
+  parentRigidbody: {fileID: 0}
 --- !u!120 &6174111342206506610
 LineRenderer:
   m_ObjectHideFlags: 0

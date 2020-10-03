@@ -11,6 +11,9 @@ public class TongueBullet : MonoBehaviour
     public Rigidbody parentRigidbody;
     LineRenderer _lineRenderer;
 
+
+    bool pull = false;
+
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -21,11 +24,24 @@ public class TongueBullet : MonoBehaviour
         _lineRenderer.SetPosition(0, transform.position);
         if (tongueEnd)
             _lineRenderer.SetPosition(1, tongueEnd.transform.position);
+
+        if(pull)
+        {
+            Vector3 force = transform.position - parentRigidbody.position;
+            parentRigidbody.AddForce(force * pullForceScale);
+        }
     }
 
+    Vector3 GetContactCenter(Collision collision)
+    {
+        Vector3 contactPosition = Vector3.zero;
+        foreach (var it in collision.contacts)
+            contactPosition += it.point;
+        contactPosition /= collision.contactCount;
+        return contactPosition;
+    }
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 force = collision.collider.transform.position - tongueEnd.position;
-        parentRigidbody.AddForceAtPosition(force * pullForceScale, tongueEnd.position);
+        pull = true;
     }
 }
