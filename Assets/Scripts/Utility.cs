@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [System.Serializable]
 public class RangedFloat
@@ -119,5 +120,12 @@ public static class Extensions
     public static float Sqrt(this float f)
     {
         return Mathf.Sqrt(f);
+    }
+
+    public static T GetComponentNotNull<T>(this Component @this) where T : class
+    {
+        var seeked = @this.GetComponent<T>();
+        Assert.IsNotNull(seeked, $"Seeked component of type {typeof(T)}");
+        return seeked;
     }
 }
