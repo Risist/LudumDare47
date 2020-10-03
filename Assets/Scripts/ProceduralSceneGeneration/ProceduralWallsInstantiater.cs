@@ -7,7 +7,8 @@ namespace Assets.Scripts.ProceduralSceneGeneration
     public class ProceduralWallsInstantiater : MonoBehaviour
     { 
         [SerializeField] private Transform _wallsParent;
-        [SerializeField] private Transform _wallPrefab;
+        [SerializeField] private Transform _indestructibleWallsPrefab;
+        [SerializeField] private Transform _destructibleWallPrefab;
 
         private void DestroyCurrentWalls()
         {
@@ -52,11 +53,16 @@ namespace Assets.Scripts.ProceduralSceneGeneration
                         var center = size / 2;
 
                         var position = new Vector3(x, 0, y) - new Vector3(center.x, 0, center.y);
-                        var rotation = Quaternion.Euler(0, angle, 0); 
-                        var wall = GameObject.Instantiate(_wallPrefab, position, rotation, _wallsParent);
+                        var rotation = Quaternion.Euler(0, angle, 0);
+
+                        Transform prefab = wallsSpecification.GetIsDestructible(new Vector2Int(x, y))
+                            ? _destructibleWallPrefab
+                            : _indestructibleWallsPrefab;
+
+                        var wall = GameObject.Instantiate(prefab, position, rotation, _wallsParent);
                         wall.transform.localPosition = position;
                         wall.transform.localRotation = rotation;
-                        wall.name = $"Wall {x}-{y}-{aDirection}";
+                        wall.name = $"Wall {x}-{y}-{aDirection}-{prefab.name}";
                     }
                 }
             }

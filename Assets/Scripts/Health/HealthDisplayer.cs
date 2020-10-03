@@ -39,10 +39,9 @@ public class HealthDisplayer : MonoBehaviour
             healthPercent = healthPercent * (1 - minScale) + minScale;
 
             transform.localScale = initialScale * healthPercent;
-
-            
         };
     }
+
     private void Update()
     {
         for (int i = 0; i < sprites.Length; ++i)

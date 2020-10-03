@@ -565,7 +565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wallsParent: {fileID: 39237061}
-  _wallPrefab: {fileID: 6950043010074888079, guid: 1c0f6ae38622d2d43b098b8c10dae887,
+  _indestructibleWallsPrefab: {fileID: 6950043010074888079, guid: 1c0f6ae38622d2d43b098b8c10dae887,
+    type: 3}
+  _destructibleWallPrefab: {fileID: 8720595024425889299, guid: 7e1b97511bd830e448e4d67bdf332691,
     type: 3}
 --- !u!114 &692847056
 MonoBehaviour:
@@ -686,8 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _possibleProps:
-  - {fileID: 7949681558054429583, guid: 40e66d913e3239b428daf918f09f2d9a, type: 3}
-  - {fileID: 7949681558054429583, guid: b60168d363c40fb4a9c048b839f55ce5, type: 3}
+  - {fileID: 6696122612355451415, guid: 1af45842735b51f41bca4215510b329a, type: 3}
+  - {fileID: 5215070437804286447, guid: 7b7fadf80b850a9499aa076125546261, type: 3}
   _random: {fileID: 928458315}
   _propsGroupsDensity: 0.004
   _propsDensityPerGroupRange: {x: 0.5, y: 0.9}

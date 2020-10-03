@@ -15,7 +15,7 @@ public class OutsideWallWidget : WallGenerationWidget
             {
                 if (floorSpecification.FloorPresenceArray[x, y])
                 {
-                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Left);
+                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Left, false);
                     break;
                 }
             }
@@ -27,7 +27,7 @@ public class OutsideWallWidget : WallGenerationWidget
             {
                 if (floorSpecification.FloorPresenceArray[x, y])
                 {
-                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Right);
+                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Right, false);
                     break;
                 }
             }
@@ -39,7 +39,7 @@ public class OutsideWallWidget : WallGenerationWidget
             {
                 if (floorSpecification.FloorPresenceArray[x, y])
                 {
-                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Down);
+                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Down, false);
                     break;
                 }
             }
@@ -51,7 +51,7 @@ public class OutsideWallWidget : WallGenerationWidget
             {
                 if (floorSpecification.FloorPresenceArray[x, y])
                 {
-                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Up);
+                    spec.AddWallDirection(new Vector2Int(x, y), WallDirection.Up, false);
                     break;
                 }
             }
