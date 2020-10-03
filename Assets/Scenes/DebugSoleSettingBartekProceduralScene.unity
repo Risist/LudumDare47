@@ -163,12 +163,12 @@ GameObject:
   - component: {fileID: 184859007}
   - component: {fileID: 184859006}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: OldCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &184859006
 AudioListener:
   m_ObjectHideFlags: 0
@@ -482,8 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83d19bb9d6a8bf42b08b4b4f670687c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPoint: {x: 0.1, y: 0.2}
-  _endPoint: {x: 0.8, y: 0.3}
+  _startPoint: {x: 0.2, y: 0.4}
+  _endPoint: {x: 0.9, y: 0.8}
 --- !u!114 &692847055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineWidth: 4
-  _isPresentIfConditionIsMet: 1
+  Outcome: 0
 --- !u!114 &1173803926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radiusMin: 0.25
   _radiusMax: 0.5
-  _isPresentIfConditionIsMet: 0
+  Outcome: 0
 --- !u!114 &1173803927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radiusMin: 0.7
   _radiusMax: 1
-  _isPresentIfConditionIsMet: 0
+  Outcome: 0
 --- !u!114 &1173803928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radiusMin: 0.6
   _radiusMax: 0.8
-  _isPresentIfConditionIsMet: 0
+  Outcome: 0
 --- !u!114 &1173803929
 MonoBehaviour:
   m_ObjectHideFlags: 0

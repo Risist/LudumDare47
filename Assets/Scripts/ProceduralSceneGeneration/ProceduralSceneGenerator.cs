@@ -30,6 +30,7 @@ public class ProceduralSceneGenerator : MonoBehaviour
         _floorInstantiater.InstantiateFloor(floorSpecification, _floorSize);
         _wallsInstantiater.InstantiateWalls( new Vector2Int(floorSpecification.FloorPresenceArray.GetLength(0), floorSpecification.FloorPresenceArray.GetLength(1)), wallsSpecification);
         _propsInstantiater.InstantiateProps(propsSpecification);
+        AstarPath.active.Scan();
     }
 
     private void ClearOutBlackHoleArea(FloorSpecification floorSpecification, WallsSpecification wallsSpecification, PropsSpecification propsSpecification)
