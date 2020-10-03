@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 2072769291}
   - component: {fileID: 2072769293}
   - component: {fileID: 2072769296}
+  - component: {fileID: 3673932649932233371}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -390,6 +391,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachineLayer: 0
   animationScript: {fileID: 11400000, guid: 0fb5298cbb541b74f900ccd6c8fcc1a3, type: 2}
+--- !u!114 &3673932649932233371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728585096204816106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  destroyOnDeath: 1
+  tResetStagger:
+    cd: 1
+  staggerLimit: 0
+  staggerLevel: 0
 --- !u!1001 &982655458019297288
 PrefabInstance:
   m_ObjectHideFlags: 0
