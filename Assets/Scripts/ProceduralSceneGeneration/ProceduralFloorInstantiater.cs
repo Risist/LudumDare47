@@ -28,9 +28,9 @@ public class ProceduralFloorInstantiater : MonoBehaviour
             {
                 if (floorSpecification.FloorPresenceArray[x, y])
                 {
-                    var cell = GameObject.Instantiate(_floorCellPrefab,
-                        new Vector3(x, 0, y) - new Vector3(centerOffset.x, 0, centerOffset.y), Quaternion.identity,
-                        _floorParent);
+                    var position = new Vector3(x, 0, y) - new Vector3(centerOffset.x, 0, centerOffset.y);
+                    var cell = GameObject.Instantiate(_floorCellPrefab, position, Quaternion.identity, _floorParent);
+                    cell.transform.localPosition = position;
                     cell.name = $"Cell {x}-{y}";
                 }
             }

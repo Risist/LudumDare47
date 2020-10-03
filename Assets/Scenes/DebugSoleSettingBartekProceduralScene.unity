@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &184859006
 AudioListener:
   m_ObjectHideFlags: 0
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31ac59dd910c524bb41d199244023a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _generateOnStart: 1
   _floorSize: {x: 50, y: 50}
   _blackHoleAreaSize: 5
   _floorGenerator: {fileID: 1173803923}
@@ -420,7 +421,6 @@ GameObject:
   - component: {fileID: 692847053}
   - component: {fileID: 692847055}
   - component: {fileID: 692847056}
-  - component: {fileID: 692847054}
   m_Layer: 0
   m_Name: WallGenerator
   m_TagString: Untagged
@@ -470,20 +470,6 @@ MonoBehaviour:
   _wallsParent: {fileID: 39237061}
   _wallPrefab: {fileID: 6950043010074888079, guid: 1c0f6ae38622d2d43b098b8c10dae887,
     type: 3}
---- !u!114 &692847054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692847050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f83d19bb9d6a8bf42b08b4b4f670687c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startPoint: {x: 0.2, y: 0.4}
-  _endPoint: {x: 0.9, y: 0.8}
 --- !u!114 &692847055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,8 +482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83d19bb9d6a8bf42b08b4b4f670687c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPoint: {x: 0.8, y: 0.3}
-  _endPoint: {x: 0.2, y: 0.8}
+  _startPoint: {x: 0.4, y: 0.9}
+  _endPoint: {x: 0.5, y: 0.1}
 --- !u!114 &692847056
 MonoBehaviour:
   m_ObjectHideFlags: 0

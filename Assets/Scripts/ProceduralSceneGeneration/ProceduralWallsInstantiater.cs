@@ -51,9 +51,11 @@ namespace Assets.Scripts.ProceduralSceneGeneration
 
                         var center = size / 2;
 
-                        var wall = GameObject.Instantiate(_wallPrefab,
-                            new Vector3(x, 0, y) - new Vector3(center.x, 0, center.y), Quaternion.Euler(0, angle, 0),
-                            _wallsParent);
+                        var position = new Vector3(x, 0, y) - new Vector3(center.x, 0, center.y);
+                        var rotation = Quaternion.Euler(0, angle, 0); 
+                        var wall = GameObject.Instantiate(_wallPrefab, position, rotation, _wallsParent);
+                        wall.transform.localPosition = position;
+                        wall.transform.localRotation = rotation;
                         wall.name = $"Wall {x}-{y}-{aDirection}";
                     }
                 }

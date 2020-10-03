@@ -19,7 +19,7 @@ public class DamageOnCollision : MonoBehaviour
         lastPosition = transform.position;
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay(Collider other)
     {
         if (!enabled)
             return;
@@ -39,7 +39,7 @@ public class DamageOnCollision : MonoBehaviour
                 damagable.DealDamage(damageDataOnce);
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!enabled)
             return;
@@ -60,7 +60,7 @@ public class DamageOnCollision : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (!enabled)
             return;
@@ -79,7 +79,7 @@ public class DamageOnCollision : MonoBehaviour
                 damagable.DealDamage(damageDataOnce);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (!enabled)
             return;

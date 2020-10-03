@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Assets.Scripts;
 using Assets.Scripts.ProceduralSceneGeneration;
 using UnityEngine;
@@ -23,18 +24,42 @@ public class SingleWallWidget : WallGenerationWidget
         {
             var p1 = points[i];
             var p2 = points[i+1];
+            if (p1.x == 23 && p1.y == 33)
+            {
+                int todo = 22;
+            }
+
 
             if (p1.x == p2.x)
             {
                 //do nothing
             }
-            else if (p1.x+1 == p2.x)
+            else if (p1.x == p2.x)
             {
                 TryAddingWall(new Vector2Int(p1.x, p1.y),WallDirection.Up,specification, floorSpecification );
             }else if (p1.x - 1 == p2.x)
             {
-                TryAddingWall(new Vector2Int(p1.x-1, p1.y),WallDirection.Up,specification, floorSpecification  );
+                if (p1.y <= p2.y)
+                {
+                    TryAddingWall(new Vector2Int(p1.x, p1.y), WallDirection.Up, specification, floorSpecification);
+                }
+                else
+                {
+                    TryAddingWall(new Vector2Int(p1.x, p1.y-1), WallDirection.Up, specification, floorSpecification);
+                }
             }
+            else if (p1.x + 1 == p2.x)
+            {
+                if (p1.y <= p2.y)
+                {
+                    TryAddingWall(new Vector2Int(p1.x+1, p1.y), WallDirection.Up, specification, floorSpecification);
+                }
+                else
+                {
+                    TryAddingWall(new Vector2Int(p1.x, p1.y-1), WallDirection.Up, specification, floorSpecification);
+                }
+            }
+
             else
             {
                 MyAssert.Fail($"x delta is too big {p1} {p2}");
@@ -46,7 +71,7 @@ public class SingleWallWidget : WallGenerationWidget
             }
             else if (p1.y+1 == p2.y)
             {
-                TryAddingWall(new Vector2Int(p1.x, p1.y+1),WallDirection.Right,specification, floorSpecification );
+                TryAddingWall(new Vector2Int(p1.x, p1.y),WallDirection.Right,specification, floorSpecification );
             }else if (p1.y - 1 == p2.y)
             {
                 TryAddingWall(new Vector2Int(p1.x, p1.y),WallDirection.Right, specification, floorSpecification );
