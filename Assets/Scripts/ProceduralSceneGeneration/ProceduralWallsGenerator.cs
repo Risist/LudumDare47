@@ -8,11 +8,11 @@ namespace Assets.Scripts.ProceduralSceneGeneration
 {
     public class ProceduralWallsGenerator : MonoBehaviour
     {
-        [SerializeField] private List<OutsideWallWidget> _outsideWallWidgets;
+        [SerializeField] private List<WallGenerationWidget> _outsideWallWidgets;
 
         void Awake()
         {
-            _outsideWallWidgets = GetComponents<OutsideWallWidget>().ToList();
+            _outsideWallWidgets = GetComponents<WallGenerationWidget>().ToList();
         }
 
         public WallsSpecification CreateWallsSpecification(FloorSpecification floorSpecification)
