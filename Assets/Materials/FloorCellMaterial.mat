@@ -137,7 +137,7 @@ Material:
     - _ShowBottom: 0
     - _ShowColorCorrection: 0
     - _ShowCustomShading: 1
-    - _ShowFog: 0
+    - _ShowFog: 1
     - _ShowFront: 1
     - _ShowGlobalGradientSettings: 0
     - _ShowLMap: 1

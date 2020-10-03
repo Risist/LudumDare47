@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31ac59dd910c524bb41d199244023a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _generateOnStart: 0
   _floorSize: {x: 50, y: 50}
   _blackHoleAreaSize: 5
   _floorGenerator: {fileID: 1173803923}
@@ -688,7 +689,9 @@ MonoBehaviour:
   - {fileID: 7949681558054429583, guid: 40e66d913e3239b428daf918f09f2d9a, type: 3}
   - {fileID: 7949681558054429583, guid: b60168d363c40fb4a9c048b839f55ce5, type: 3}
   _random: {fileID: 928458315}
-  _propsDensity: 0.02
+  _propsGroupsDensity: 0.004
+  _propsDensityPerGroupRange: {x: 0.5, y: 0.9}
+  _groupRadiusRange: {x: 1, y: 3}
 --- !u!4 &1002230805
 Transform:
   m_ObjectHideFlags: 0
@@ -819,6 +822,8 @@ MonoBehaviour:
   _floorWidgetsCountRange: {x: 4, y: 8}
   _wallsCountRange: {x: 2, y: 10}
   _wallsLengthRange: {x: 0.06, y: 0.2}
+  _orbitingWallsCountRange: {x: 3, y: 7}
+  _orbitingWallsAngleLengthRange: {x: 0.8, y: 2}
   _floorSizeRange: {x: 40, y: 70}
 --- !u!4 &1049157005
 Transform:

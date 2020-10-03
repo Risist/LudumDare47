@@ -10,11 +10,12 @@ namespace Assets.Scripts.Effects
     public class BlackHoleRayController : MonoBehaviour
     {
         [SerializeField] private GameObject _blackHole;
+        [SerializeField] private Collider _blackHolePullCollider;
         [SerializeField] private GameObject _fish;
         [SerializeField] private ParticleSystem _particle;
         [SerializeField] private ParticleSystemRenderer _particleRenderer;
-        [SerializeField, Range(0,100)] private float _zm;
-        [SerializeField] private Material _particleMaterial;
+        [SerializeField, Range(0,5)] private float _zm;
+        private Material _particleMaterial;
 
         void Awake()
         {
@@ -23,6 +24,8 @@ namespace Assets.Scripts.Effects
 
         void Update()
         {
+            _particleRenderer.enabled = _blackHolePullCollider.enabled && _blackHolePullCollider.gameObject.activeInHierarchy;
+
             var startPos = _fish.transform.position;
             transform.position = startPos;
             var delta = (_blackHole.transform.position -startPos);
