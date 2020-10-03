@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(LineRenderer))]
-[ExecuteInEditMode]
 public class Tongue : MonoBehaviour
 {
-    public GameObject tongueEnd;
-    LineRenderer _lineRenderer;
-
-    void Start()
-    {
-        _lineRenderer = GetComponent<LineRenderer>();
-    }
+    public TongueBullet tongueBullet;
+    public Transform tongueSpawnPoint;
 
     void Update()
     {
-        _lineRenderer.SetPosition(0, transform.position);
-        if(tongueEnd)
-            _lineRenderer.SetPosition(1, tongueEnd.transform.position);
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            FireTongueBullet();
+        }
+    }
+
+    public void FireTongueBullet()
+    {
+        var bullet = Instantiate(tongueBullet, tongueSpawnPoint.position, tongueSpawnPoint.rotation);
+        bullet.tongueEnd = transform;
     }
 }
