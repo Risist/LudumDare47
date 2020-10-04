@@ -43,7 +43,9 @@ public class InputControllerMouseKeyboard : InputController
         }
         else
             Debug.LogWarning("player direction raycast does not hit a collider");
-        
+
+        inputHolder.rotationInput = Vector2.zero;
+
         /// keys
         for (int i = 0; i < keyAxisCode.Length; ++i)
         {

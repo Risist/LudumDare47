@@ -771,6 +771,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayObjectsRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 0.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: 0.48499963
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 0.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0.48499963
+      objectReference: {fileID: 0}
     - target: {fileID: 2731689261542781672, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_Enabled
@@ -779,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 2731689261542781678, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2731689262597762197, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
@@ -1002,12 +1032,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 885949060}
   _rotationCenter: {fileID: 236581917}
-  _cameraHeight: 30
+  _cameraHeight: 200
   _changeFovByDistanceToTarget: 1
-  _maximumCameraHorizontalDistanceFromCenter: 20
-  _fovMultiplier: 100
-  _keepConstantHorizontalDistanceFromTarget: 0
-  _constantHorizontalDistanceFromTarget: 15
+  _maximumCameraHorizontalDistanceFromCenter: 99999
+  _fovMultiplier: 300
+  _keepConstantHorizontalDistanceFromTarget: 1
+  _constantHorizontalDistanceFromTarget: 300
+  _backOffset: 0
 --- !u!1 &1964104506
 GameObject:
   m_ObjectHideFlags: 0

@@ -907,6 +907,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8999462424803128034}
     m_Modifications:
+    - target: {fileID: 1839521978, guid: 572ecc63c1afeee40bba18a7d3214dcf, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676726859998935301, guid: 572ecc63c1afeee40bba18a7d3214dcf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8676726859998935302, guid: 572ecc63c1afeee40bba18a7d3214dcf,
         type: 3}
       propertyPath: m_LocalPosition.x

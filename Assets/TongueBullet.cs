@@ -1,44 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(LineRenderer))]
-[ExecuteInEditMode]
 public class TongueBullet : MonoBehaviour
 {
     public float pullForceScale;
+    public float tonguePullForceScale;
     public Transform tongueEnd;
+    public Transform tongueStart;
     public Rigidbody parentRigidbody;
     LineRenderer _lineRenderer;
     Rigidbody _rb;
+    Motor _motor;
 
     bool pull = false;
 
-    Timer tPull = new Timer();
+    MinimalTimer tExecute = new MinimalTimer();
+    const float backTime = 0.25f;
+    const float destroyDistance = 1.25f;
 
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _rb = GetComponent<Rigidbody>();
+        _motor = GetComponent<Motor>();
+        tExecute.Restart();
+        _motor._currentForce += _rb.velocity.magnitude;
     }
 
     void Update()
     {
-        _lineRenderer.SetPosition(0, transform.position);
         if (tongueEnd)
             _lineRenderer.SetPosition(1, tongueEnd.transform.position);
+        if(tongueStart)
+            _lineRenderer.SetPosition(0, tongueStart.transform.position);
 
-        if(pull)
+        Vector3 force = transform.position - parentRigidbody.position;
+        if (tExecute.IsReady(backTime))
         {
-            Vector3 force = transform.position - parentRigidbody.position;
-            parentRigidbody.AddForce(force * pullForceScale);
-            //if(tPull.IsReady())
+            //var collider = GetComponent<Collider>();
+            //collider.enabled = true;
+            _motor.enabled = false;
+            _rb.isKinematic = true;
+            transform.parent = tongueEnd;
+
+            transform.localPosition = Vector3.Lerp(tongueEnd.position, transform.position, 0.99f);
+            if(force.magnitude < destroyDistance)
             {
-                var collider = GetComponent<Collider>();
-                collider.enabled = true;
-                _rb.isKinematic = false;
-                _rb.AddForce(-force * pullForceScale);
+                Destroy(gameObject);
             }
+        }
+    }
+    void FixedUpdate()
+    {
+        Vector3 force = transform.position - parentRigidbody.position;
+        if (pull)
+        {
+            parentRigidbody.AddForce(force * pullForceScale);
         }
     }
 
@@ -50,15 +70,14 @@ public class TongueBullet : MonoBehaviour
         contactPosition /= collision.contactCount;
         return contactPosition;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
-        if(!pull)
-            tPull.Restart();
+        if (collision.attachedRigidbody == _rb || collision.attachedRigidbody == parentRigidbody)
+            return;
         pull = true;
-        var collider = GetComponent<Collider>();
-        var motor = GetComponent<Motor>();
-        motor.enabled = false;
-        //_rb.isKinematic = true;
+        _motor.enabled = false;
+        _rb.isKinematic = true;
+        _rb.velocity = Vector3.zero;
         //collider.enabled = false;
 
     }

@@ -37,6 +37,11 @@ namespace Assets.Scripts.Health
             {
                 _damageSystem = GameObject.Instantiate(_collisionParticlesPrefab, damagePosition,
                     Quaternion.LookRotation(damageDirection));
+
+                _damageSystem.transform.localScale = new Vector3(
+                    _damageSystem.transform.localScale.x * transform.localScale.x,
+                    _damageSystem.transform.localScale.y * transform.localScale.y,
+                    _damageSystem.transform.localScale.z * transform.localScale.z);
             }
         }
     }

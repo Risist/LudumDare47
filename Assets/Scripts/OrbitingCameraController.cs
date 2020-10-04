@@ -11,6 +11,7 @@ public class OrbitingCameraController : MonoBehaviour
     [SerializeField] private float _fovMultiplier;
     [SerializeField] private bool _keepConstantHorizontalDistanceFromTarget;
     [SerializeField] private float _constantHorizontalDistanceFromTarget;
+    [SerializeField] private float _backOffset;
     private Camera _camera;
 
     void Awake()
@@ -35,7 +36,8 @@ public class OrbitingCameraController : MonoBehaviour
         }
 
 
-        transform.position = new Vector3(cameraHorizontalPosition.x, _cameraHeight, cameraHorizontalPosition.y);
+        Vector3 toTarget = (_rotationCenter.position - _target.transform.position).ToPlane();
+        transform.position = new Vector3(cameraHorizontalPosition.x, _cameraHeight, cameraHorizontalPosition.y) - toTarget.normalized * _backOffset;
 
         transform.LookAt(_target);
 
