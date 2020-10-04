@@ -13,7 +13,8 @@ namespace Ai
             var inputHolder = controller.GetComponentInParent<InputHolder>();
             var transform = controller.transform;
             var fishReferences = controller.GetComponent<FishNpc>();
-            //var enemyFilter = GetEnemyFilter();
+            var enemyFilter = GetAllyFilter();
+            var obstacleFilter = GetEnemyFilter();
             Timer tState = new Timer();
 
             //var stateIdle = stateMachine.AddNewStateAsCurrent();
@@ -24,8 +25,9 @@ namespace Ai
             var stateInto = stateMachine.AddNewState();
 
             stateAway
-                .AddOnBegin(() => tState.RestartRandom(0.25f, 0.5f))
+                .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
+                .SetUtility(1.5f)
                 .AddOnUpdate(() =>
             {
                 Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
@@ -37,13 +39,22 @@ namespace Ai
 
                 float tongueChance =
                     fishReferences.tongue.currentState == Tongue.EState.EMoveForward ||
-                    fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.3f : 0.01f;
+                    fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.25f : 0.01f;
+
+                if (enemyFilter.GetTarget() != null)
+                {
+                    tongueChance += 0.025f;
+
+                    Vector2 toTarget = (enemyFilter.GetTarget().position - transform.position).To2D().normalized;
+                    inputHolder.directionInput = toTarget;
+                }
                 inputHolder.keys[1] = Random.value <= tongueChance;
             });
 
             stateSideFlow
-                .AddOnBegin(() => tState.RestartRandom(0.25f, 0.5f))
+                .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
+                .SetUtility(1.75f)
                 .AddOnUpdate(() =>
             {
                 Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
@@ -55,12 +66,21 @@ namespace Ai
 
                 float tongueChance =
                     fishReferences.tongue.currentState == Tongue.EState.EMoveForward ||
-                    fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.3f : 0.01f;
+                    fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.25f : 0.01f;
+
+                if (enemyFilter.GetTarget() != null)
+                {
+                    tongueChance += 0.025f;
+
+                    Vector2 toTarget = (enemyFilter.GetTarget().position - transform.position).To2D().normalized;
+                    inputHolder.directionInput = toTarget;
+                }
                 inputHolder.keys[1] = Random.value <= tongueChance;
             });
             stateSideCounter
-                .AddOnBegin(() => tState.RestartRandom(0.25f, 0.5f))
+                .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
+                .SetUtility(0.75f)
                 .AddOnUpdate(() =>
                 {
                     Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
@@ -72,12 +92,21 @@ namespace Ai
 
                     float tongueChance =
                         fishReferences.tongue.currentState == Tongue.EState.EMoveForward ||
-                        fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.3f : 0.01f;
+                        fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.25f : 0.01f;
+
+                    if (enemyFilter.GetTarget() != null)
+                    {
+                        tongueChance += 0.025f;
+
+                        Vector2 toTarget = (enemyFilter.GetTarget().position - transform.position).To2D().normalized;
+                        inputHolder.directionInput = toTarget;
+                    }
                     inputHolder.keys[1] = Random.value <= tongueChance;
                 });
             stateInto
-                .AddOnBegin(() => tState.RestartRandom(0.25f, 0.5f))
+                .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
+                .SetUtility(0.5f)
                 .AddOnUpdate(() =>
                 {
                     Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
@@ -87,9 +116,17 @@ namespace Ai
 
                     inputHolder.keys[0] = Random.value <= 0.05f;
 
-                    float tongueChance = 
+                    float tongueChance =
                         fishReferences.tongue.currentState == Tongue.EState.EMoveForward ||
-                        fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.3f : 0.01f;
+                        fishReferences.tongue.currentState == Tongue.EState.EPull ? 0.25f : 0.01f;
+
+                    if (enemyFilter.GetTarget() != null)
+                    {
+                        tongueChance += 0.025f;
+
+                        Vector2 toTarget = (enemyFilter.GetTarget().position - transform.position).To2D().normalized;
+                        inputHolder.directionInput = toTarget;
+                    }
                     inputHolder.keys[1] = Random.value <= tongueChance;
                 });
 
