@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/OneVersionProceduralScene.unity
+    path: Assets/Scenes/AlternativeMovement_OneVersionProceduralScene.unity
     guid: 799bdde2d8332004c9fa2c7e3a32caf0
+  - enabled: 1
+    path: Assets/Scenes/OneVersionProceduralScene.unity
+    guid: 3f5f51444ec03d94c90edd1a71117b9f
   m_configObjects: {}

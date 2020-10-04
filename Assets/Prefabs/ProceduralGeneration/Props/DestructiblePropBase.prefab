@@ -68,3 +68,4 @@ MonoBehaviour:
     type: 3}
   _destructionParticlesPrefab: {fileID: 4550776408872856077, guid: 3b8ac4c6a203e1d43bb9e97ccf2a0b3b,
     type: 3}
+  _particleSizeMultiplier: 1
