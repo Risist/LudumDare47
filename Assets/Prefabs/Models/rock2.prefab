@@ -102,6 +102,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396509872613730142}
+  - component: {fileID: -7659243896839687612}
+  - component: {fileID: 4851113512613774001}
   m_Layer: 0
   m_Name: rock2
   m_TagString: Untagged
@@ -131,6 +133,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7659243896839687612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540996524728686993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  thresholdDamageAmountToReact: 0
+  destroyOnDeath: 1
+  deparent: 0
+  tResetStagger:
+    cd: 1
+  staggerLimit: 0
+  staggerLevel: 0
+--- !u!114 &4851113512613774001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540996524728686993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c04a15d94b61c48a271d91fdfec586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionParticlesPrefab: {fileID: 8626188729385428486, guid: de26fffcecae6264390ee8067e061b18,
+    type: 3}
+  _destructionParticlesPrefab: {fileID: 4550776408872856077, guid: 3b8ac4c6a203e1d43bb9e97ccf2a0b3b,
+    type: 3}
 --- !u!1 &1252459523759314469
 GameObject:
   m_ObjectHideFlags: 0
