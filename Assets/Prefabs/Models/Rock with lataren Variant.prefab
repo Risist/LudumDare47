@@ -327,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 7826080338485231114, guid: 07903a89a038e5240a2c3d4c161757cc,
         type: 3}
       propertyPath: m_Name
-      value: Rock with lataren
+      value: Rock with lataren Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8587460318967413979, guid: 07903a89a038e5240a2c3d4c161757cc,
         type: 3}

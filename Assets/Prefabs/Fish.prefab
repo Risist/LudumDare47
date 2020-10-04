@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6344954374837182074}
   - component: {fileID: 2469202592475376826}
   - component: {fileID: 265313512228468362}
+  - component: {fileID: 8364305683249450900}
   m_Layer: 11
   m_Name: tongueBullet
   m_TagString: Untagged
@@ -272,6 +273,33 @@ MonoBehaviour:
   backDistanceTollerance: 0.75
   _myRigidbody: {fileID: 2072769294}
   currentState: 0
+--- !u!114 &8364305683249450900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730444613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb7462de24fcb34095a105f5c5bb2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  damageDataOnce:
+    damage: 0
+    staggerIncrease: 0
+  damageDataContinous:
+    damage: 10
+    staggerIncrease: 10
+  damageDataEnter:
+    damage: 0
+    staggerIncrease: 0
+  damageDataImpact:
+    damage: 0
+    staggerIncrease: 0
 --- !u!1 &2075786117
 GameObject:
   m_ObjectHideFlags: 0
