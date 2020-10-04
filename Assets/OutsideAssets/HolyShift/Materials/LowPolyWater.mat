@@ -105,6 +105,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Ambient: 1
+    - _DebugScalar: 1
     - _Displacement: 0.27863377
     - _DisplacementTiling: 18.586807
     - _DistortionPower: 5
@@ -120,6 +121,7 @@ Material:
     - _MaxTreshold: 0.5
     - _MaxTreshould: 0.5
     - _NormalsDisplacement: 0
+    - _OutsideWhirlSpeed: 0.066
     - _ReflDistort: 0.9267696
     - _RefrDistort: 1.4393286
     - _Shininess: 272
@@ -137,6 +139,9 @@ Material:
     - _WaveFoamDistort: 0.27931035
     - _WaveScale: 0.046289656
     - _WavesDensity: 8
+    - _WhirlIntensity: 2
+    - _WhirlShapeFactor: 4.57
+    - _WhirlwindSize: 10
     m_Colors:
     - WaveSpeed: {r: 1.086165, g: 4.440575, b: 12.105146, a: -3.0206447}
     - _AnimationDirection: {r: 2, g: 4, b: 2, a: -1}
