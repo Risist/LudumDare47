@@ -8,6 +8,7 @@ public class HealthController : MonoBehaviour, IDamageable
     [Header("Health")]
     public float currentHealth = 100;
     public float maxHealth = 100;
+    public float thresholdDamageAmountToReact;
 
     public bool destroyOnDeath = true;
 
@@ -30,6 +31,10 @@ public class HealthController : MonoBehaviour, IDamageable
 
     public void DealDamage(DamageData data)
     {
+        if (data.damage < thresholdDamageAmountToReact)
+        {
+            return;
+        }
         currentHealth -= data.damage;
         staggerLevel += data.staggerIncrease;
 

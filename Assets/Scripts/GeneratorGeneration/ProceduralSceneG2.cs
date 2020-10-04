@@ -15,6 +15,8 @@ namespace Assets.Scripts.GeneratorGeneration
         [SerializeField] private Vector2 _floorWidgetsCountRange;
         [SerializeField] private Vector2 _wallsCountRange;
         [SerializeField] private Vector2 _wallsLengthRange;
+        [SerializeField] private Vector2 _orbitingWallsCountRange;
+        [SerializeField] private Vector2 _orbitingWallsAngleLengthRange;
         [SerializeField] private Vector2Int _floorSizeRange;
 
         void Start()
@@ -54,6 +56,23 @@ namespace Assets.Scripts.GeneratorGeneration
                 var startPoint = new Vector2(_random.RandomFloat(0, 1), _random.RandomFloat(0, 1));
                 var angle = _random.RandomFloat(Mathf.PI * 2);
                 var endPoint = startPoint + new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * wallLength;
+                var wallWidget = _sceneGenerator._wallsGenerator.gameObject.AddComponent<SingleWallWidget>();
+                wallWidget._startPoint = startPoint;
+                wallWidget._endPoint = endPoint;
+            }
+
+
+            var orbitingWallsCount = Mathf.RoundToInt(_random.RandomFloat(_orbitingWallsCountRange.x, _orbitingWallsCountRange.y));
+            for (int i = 0; i < orbitingWallsCount; i++)
+            {
+                var angleLength = _random.RandomFloat(_orbitingWallsAngleLengthRange.x, _orbitingWallsAngleLengthRange.y);
+                var radius = _random.RandomFloat(0.2f, 0.5f);
+                var startAngle = _random.RandomFloat(Mathf.PI * 2);
+                var startPoint = new Vector2(Mathf.Sin(startAngle), Mathf.Cos(startAngle)) *radius+ new Vector2(0.5f, 0.5f);
+
+                var endAngle = startAngle + angleLength;
+
+                var endPoint = new Vector2(Mathf.Sin(endAngle), Mathf.Cos(endAngle)) *radius+ new Vector2(0.5f, 0.5f);
                 var wallWidget = _sceneGenerator._wallsGenerator.gameObject.AddComponent<SingleWallWidget>();
                 wallWidget._startPoint = startPoint;
                 wallWidget._endPoint = endPoint;

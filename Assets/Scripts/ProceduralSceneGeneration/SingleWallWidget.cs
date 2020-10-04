@@ -113,24 +113,16 @@ public class SingleWallWidget : WallGenerationWidget
                 throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
         }
 
-        try
+        var offsetedCoords = coords + additionalCoordOffset;
+        if (floorSpecification.FloorPresenceArray[coords.x, coords.y] || (
+            offsetedCoords.x >= 0 && offsetedCoords.y >= 0 && offsetedCoords.x < floorSpecification.Size.x &&
+            offsetedCoords.y < floorSpecification.Size.y &&
+            floorSpecification.FloorPresenceArray[offsetedCoords.x, offsetedCoords.y]
+        ))
         {
-            var offsetedCoords = coords + additionalCoordOffset;
-            if (floorSpecification.FloorPresenceArray[coords.x, coords.y] || (
-                offsetedCoords.x >= 0 && offsetedCoords.y >= 0 && offsetedCoords.x < floorSpecification.Size.x &&
-                offsetedCoords.y < floorSpecification.Size.y &&
-                floorSpecification.FloorPresenceArray[offsetedCoords.x, offsetedCoords.y]
-            ))
-            {
-                wallsSpecification.AddWallDirection(coords, direction);
-            }
-        }
-        catch
-        {
-            throw;
+            wallsSpecification.AddWallDirection(coords, direction, true);
         }
     }
-
 
     public static IEnumerable<(int x, int y)> GetPointsOnLine(int x0, int y0, int x1, int y1)
     {

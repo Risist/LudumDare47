@@ -70,6 +70,10 @@ public class DamageOnCollision : MonoBehaviour
             return;
 
         var damagable = collision.gameObject.GetComponent<IDamageable>();
+        if (damagable == null)
+        {
+            damagable = collision.gameObject.GetComponentInParent<IDamageable>();
+        }
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
@@ -80,12 +84,12 @@ public class DamageOnCollision : MonoBehaviour
             damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
             damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
             damageDataImpactTemp.position = transform.position;
+            damageDataImpactTemp.direction = collision.GetContact(0).normal;
 
             damagable.DealDamage(damageDataImpactTemp);
 
             if (AttemptToDamage(damagable))
                 damagable.DealDamage(damageDataOnce);
-
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -97,6 +101,10 @@ public class DamageOnCollision : MonoBehaviour
             return;
 
         var damagable = collision.gameObject.GetComponent<IDamageable>();
+        if (damagable == null)
+        {
+            damagable = collision.gameObject.GetComponentInParent<IDamageable>();
+        }
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
@@ -106,6 +114,7 @@ public class DamageOnCollision : MonoBehaviour
             damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
             damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
             damageDataImpactTemp.position = transform.position;
+            damageDataImpactTemp.direction = collision.GetContact(0).normal;
 
             damagable.DealDamage(damageDataImpactTemp);
             if (AttemptToDamage(damagable))
