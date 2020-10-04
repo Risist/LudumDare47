@@ -131,7 +131,8 @@ MonoBehaviour:
   PositionOffsetFrequency: 0.2
   WaveFrequency: 0.5
   RoundingForce: 0.5
-  PullingForceFactor: 0.1
+  PullingForceFactor: 0
+  MaximumSpeed: 10
 --- !u!96 &4205066684080930908
 TrailRenderer:
   serializedVersion: 2

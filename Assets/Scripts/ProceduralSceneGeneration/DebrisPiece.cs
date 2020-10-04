@@ -18,6 +18,7 @@ namespace Assets.Scripts.ProceduralSceneGeneration
         public float WaveFrequency;
         public float RoundingForce;
         public float PullingForceFactor;
+        public float MaximumSpeed;
         private Rigidbody _rb;
 
         void Awake()
@@ -36,6 +37,7 @@ namespace Assets.Scripts.ProceduralSceneGeneration
             //_rb.position = new Vector3(_rb.position.x, floatTarget, _rb.position.z);
 
             AddRoundingForceFromBlackHole(positionDelta);
+            _rb.velocity = _rb.velocity.normalized * Mathf.Min(_rb.velocity.magnitude, MaximumSpeed);
         }
 
         private void AddRoundingForceFromBlackHole(Vector2 positionDelta)
