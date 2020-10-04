@@ -344,7 +344,7 @@ float invLerpClamped(float from, float to, float value){
         // Calc threshold
         float threshold = positiveSin(i.bumpCoords.x * _TresholdDensity) * _MaxTreshold * (_TresholdFalloff - zDelta);
         // Modify final color
-        baseColor = baseColor + 0*saturate(nearBin(threshold, waves, _TargetValue) + nearBin(threshold, zDelta, 0.0)) * _WavesColor  * _WavesColor.a;
+        baseColor = baseColor + saturate(nearBin(threshold, waves, _TargetValue) + nearBin(threshold, zDelta, 0.0)) * _WavesColor  * _WavesColor.a;
 		
 		UNITY_APPLY_FOG(i.fogCoord, baseColor);
 		return lerp(baseColor,float4(0,0.3,0.3,1),  pow(whirlwindStrength,2.5));

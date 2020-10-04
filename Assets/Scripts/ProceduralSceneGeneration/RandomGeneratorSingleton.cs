@@ -6,6 +6,16 @@ public class RandomGeneratorSingleton : MonoBehaviour
 {
     private static Random _random;
 
+    public static Random GetRandom()
+    {
+        if (_random == null)
+        {
+            _random = new Random(0);
+        }
+
+        return _random;
+    }
+
     void Awake()
     {
         if (_random == null)

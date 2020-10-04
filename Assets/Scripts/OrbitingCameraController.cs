@@ -31,6 +31,10 @@ public class OrbitingCameraController : MonoBehaviour
 
     void Update()
     {
+        if (_target == null)
+        {
+            return;
+        }
         var targetAngle = Mathf.Atan2(_target.position.z - _rotationCenter.position.z, _target.position.x - _rotationCenter.position.x);
         var targetDistanceFromCenter = Vector2.Distance(new Vector2(_target.position.x, _target.position.z), new Vector2(_rotationCenter.position.x, _rotationCenter.position.z));
 
