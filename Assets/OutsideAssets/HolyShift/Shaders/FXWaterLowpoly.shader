@@ -45,10 +45,21 @@ Properties {
 	_TimeScale2("Timescale for wave 2", Float) = 5.0
 	_WavesColor("Waves color", Color) = (0.3 ,0.35, 0.25, 0.25)
 	_TargetValue("Waves target value", Range (0.0, 1.0)) = 0.0
+
+	_DebugScalar("DebugScalar",Range(0,1)) = 0.0
+	_WhirlwindSize("WhirlwindSize",Range(0,30)) = 10.0
+	_WhirlIntensity("WhirlIntensity",Range(0,6)) = 2.0
+	_OutsideWhirlSpeed("OutsideWhirlSpeed", Range(0,2)) = 0.1
+	_WhirlShapeFactor("WhirlShapeFactor", Range(0,10)) = 4
 }
 
 
 CGINCLUDE
+
+	float _WhirlwindSize;
+	float _WhirlIntensity;
+	float _OutsideWhirlSpeed;
+	float _WhirlShapeFactor;
 
 	#include "UnityCG.cginc"
 	#include "WaterInclude.cginc"
@@ -69,6 +80,7 @@ CGINCLUDE
 		float4 bumpCoords : TEXCOORD2;
 		float4 screenPos : TEXCOORD3;
 		float4 grabPassPos : TEXCOORD4;
+		float2 tileUv : ANY;
 		UNITY_FOG_COORDS(5)
 	};
 
@@ -162,6 +174,25 @@ CGINCLUDE
        return sin(x) * 0.5 + 0.5;
     }
 
+	float2 rotateUv(float2 inputUv, float  angle){
+		float sinX = sin (angle);
+		float cosX = cos (angle);
+		float sinY = sin (angle);
+		float2x2 rotationMatrix = float2x2( cosX, -sinX, sinY, cosX);
+		return mul ( inputUv, rotationMatrix );
+	}
+
+	float _DebugScalar;
+
+float invLerp(float from, float to, float value){
+  return (value - from) / (to - from);
+}
+
+float invLerpClamped(float from, float to, float value){
+	return saturate(invLerp(from,to,value));
+
+	}
+
 
 	v2f vert(appdata_full v)
 	{
@@ -183,9 +214,19 @@ CGINCLUDE
 		);
 		
 		v.vertex.xyz += offsets;
+
 		
 		// one can also use worldSpaceVertex.xz here (speed!), albeit it'll end up a little skewed
 		half2 tileableUv = mul(unity_ObjectToWorld,(v.vertex)).xz;
+
+		float whirlwindSize = 10;
+		float whirlIntensity = 2;
+		float distanceToCenterUv = length(tileableUv.xy);
+		float whirlwindStrength = invLerp( whirlwindSize, 0, distanceToCenterUv);
+
+		if(whirlwindStrength>0){
+		v.vertex.y -= pow(whirlwindStrength+1,_WhirlShapeFactor) - 1;
+		}
 		
 		o.bumpCoords.xyzw = (tileableUv.xyxy + _Time.xxxx * _BumpDirection.xyzw) * _BumpTiling.xyzw;
 
@@ -195,17 +236,52 @@ CGINCLUDE
 
 		ComputeScreenAndGrabPassPos(o.pos, o.screenPos, o.grabPassPos);
 		
-		o.normalInterpolator.xyz = nrml;
+		o.normalInterpolator.xyz = nrml; // to po prostu do góry
 		
 		o.viewInterpolator.w = saturate(offsets.y);
 		o.normalInterpolator.w = 1;//GetDistanceFadeout(o.screenPos.w, DISTANCE_SCALE);
+
+		o.tileUv =  tileableUv.xy;
 		
 		UNITY_TRANSFER_FOG(o,o.pos);
 		return o;
 	}
 
+
 	half4 frag( v2f i ) : SV_Target
 	{
+		float whirlwindSize = _WhirlwindSize;
+		float whirlIntensity = _WhirlIntensity;
+		float distanceToCenterUv = length(i.tileUv);
+		float whirlwindStrength = invLerpClamped( whirlwindSize, 0, distanceToCenterUv);
+
+		float cycle = 3.14159*2;
+		float byTimePhaseA = fmod(_Time.z,cycle);
+		//byTimePhaseA = _DebugScalar * cycle ;
+		float offsetA = (byTimePhaseA/cycle)*2;
+		float strengthA = 1-abs((byTimePhaseA / cycle)-0.5)*2;
+		float2 tileUvA = rotateUv(i.tileUv, pow(whirlwindStrength*4,whirlIntensity)+pow(3+offsetA,1+whirlwindStrength));
+
+		float byTimePhaseB = fmod(_Time.z+cycle/2,cycle);
+		//byTimePhaseB = _DebugScalar * cycle ;
+		float offsetB = (byTimePhaseB/cycle)*2;
+		float strengthB = 1-abs((byTimePhaseB / cycle)-0.5)*2;
+		float2 tileUvB = rotateUv(i.tileUv, pow(whirlwindStrength*4,whirlIntensity)+pow(3+offsetB,1+whirlwindStrength));
+
+		float lerpingWidlwindStrength = invLerpClamped(0, 0.1, whirlwindStrength);
+		float2 uvFromWhirlwind = (tileUvA*strengthA +tileUvB*strengthB )/(strengthA+strengthB);
+		
+		float byTimePhase0 = fmod(_Time.z*_OutsideWhirlSpeed,cycle);
+		float2 standardRotatedUv = rotateUv(i.tileUv, byTimePhase0);
+
+		i.tileUv.xy = lerp(standardRotatedUv, uvFromWhirlwind, lerpingWidlwindStrength);
+
+		//return lerpingWidlwindStrength;
+		//return whirlwindStrength;
+		//return float4(i.tileUv.xyx,1);
+
+		i.bumpCoords.xyzw = (i.tileUv.xyxy + _Time.xxxx * _BumpDirection.xyzw) * _BumpTiling.xyzw;
+
 		half3 worldNormal = PerPixelNormal(_BumpMap, i.bumpCoords, VERTEX_WORLD_NORMAL, PER_PIXEL_DISPLACE);
 		half3 viewVector = normalize(i.viewInterpolator.xyz);
 
@@ -270,7 +346,7 @@ CGINCLUDE
         baseColor = baseColor + saturate(nearBin(threshold, waves, _TargetValue) + nearBin(threshold, zDelta, 0.0)) * _WavesColor  * _WavesColor.a;
 		
 		UNITY_APPLY_FOG(i.fogCoord, baseColor);
-		return baseColor;
+		return lerp(baseColor,float4(0,0.3,0.3,1),  whirlwindStrength-0.5);
 	}
 	
 	//
@@ -317,6 +393,7 @@ CGINCLUDE
 
 	half4 frag300( v2f_noGrab i ) : SV_Target
 	{
+		return float4(0,1,0,1);
 		half3 worldNormal = PerPixelNormal(_BumpMap, i.bumpCoords, normalize(VERTEX_WORLD_NORMAL), PER_PIXEL_DISPLACE);
 
 		half3 viewVector = normalize(i.viewInterpolator.xyz);
@@ -395,6 +472,7 @@ CGINCLUDE
 
 		worldNormal.xz *= _FresnelScale;
 		half refl2Refr = Fresnel(viewVector, worldNormal, FRESNEL_BIAS, FRESNEL_POWER);
+		return float4(1,0,0,1);
 
 		half4 baseColor = _BaseColor;
 		baseColor = lerp(baseColor, _ReflectionColor, saturate(refl2Refr * 2.0));
@@ -419,7 +497,7 @@ Subshader
 	Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
 			ZTest LEqual
-			ZWrite Off
+			ZWrite On
 			Cull Off
 		
 			CGPROGRAM
