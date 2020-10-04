@@ -8,7 +8,7 @@ public class PullInto : MonoBehaviour
     public float sideForce;
     private void OnTriggerStay(Collider other)
     {
-        if (!other.attachedRigidbody || other.isTrigger)
+        if (!other.attachedRigidbody || other.isTrigger || other.gameObject.layer == LayerMask.NameToLayer("Debris"))
             return;
 
         Vector3 into = transform.position - other.attachedRigidbody.position;
