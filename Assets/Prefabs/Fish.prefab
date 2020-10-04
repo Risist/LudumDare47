@@ -696,6 +696,7 @@ MonoBehaviour:
   maxHealth: 100
   thresholdDamageAmountToReact: 0
   destroyOnDeath: 1
+  deparent: 1
   tResetStagger:
     cd: 1
   staggerLimit: 0

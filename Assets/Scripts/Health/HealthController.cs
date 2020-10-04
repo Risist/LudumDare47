@@ -11,6 +11,7 @@ public class HealthController : MonoBehaviour, IDamageable
     public float thresholdDamageAmountToReact;
 
     public bool destroyOnDeath = true;
+    public bool deparent = false;
 
     public Action<DamageData> onDamageCallback;
     public Action<DamageData> onDeathCallback;
@@ -67,6 +68,8 @@ public class HealthController : MonoBehaviour, IDamageable
             if(destroyOnDeath)
                 Destroy(gameObject);
         };
+        if (deparent)
+            transform.parent = null;
     }
 
     void Update()
