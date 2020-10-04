@@ -49,7 +49,7 @@ public class Tongue : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         switch(currentState)
         {
             case EState.EIdle:

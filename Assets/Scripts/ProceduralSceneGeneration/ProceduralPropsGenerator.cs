@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
+
 public class ProceduralPropsGenerator : MonoBehaviour
 {
     [SerializeField] private List<PropGenerationWidget> _propGenerators;

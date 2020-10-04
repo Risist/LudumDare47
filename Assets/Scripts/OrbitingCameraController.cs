@@ -5,14 +5,24 @@ public class OrbitingCameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private Transform _rotationCenter;
-    [SerializeField] private float _cameraHeight;
-    [SerializeField] private bool _changeFovByDistanceToTarget;
-    [SerializeField] private float _maximumCameraHorizontalDistanceFromCenter;
-    [SerializeField] private float _fovMultiplier;
-    [SerializeField] private bool _keepConstantHorizontalDistanceFromTarget;
-    [SerializeField] private float _constantHorizontalDistanceFromTarget;
-    [SerializeField] private float _backOffset;
     private Camera _camera;
+
+    [Header("CameraHeight")] 
+    [SerializeField] private CameraHeightMode _heightMode;
+    [SerializeField] private float _constantHeight;
+    [SerializeField] private float _heightByDistanceFactor;
+
+    [Header("CameraHorizontalPosition")] 
+    [SerializeField] private CameraHorizontalPositionMode _horizontalPositionMode;
+    [SerializeField] private Vector2 _horizontalDistanceRange; 
+
+    [Header("Location change speed")]
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _transpositionSpeed;
+
+    [Header("Fov settings in perspective mode")]
+    [SerializeField] private bool _changeFovByDistanceToTarget;
+    [SerializeField] private float _fovMultiplier;
 
     void Awake()
     {
@@ -26,25 +36,45 @@ public class OrbitingCameraController : MonoBehaviour
 
         var cameraHorizontalPosition = new Vector2(Mathf.Cos(targetAngle+Mathf.PI), Mathf.Sin(targetAngle+Mathf.PI)) * targetDistanceFromCenter;
         var positionMagnitude = cameraHorizontalPosition.magnitude;
-        cameraHorizontalPosition = cameraHorizontalPosition.normalized * Mathf.Min(_maximumCameraHorizontalDistanceFromCenter, positionMagnitude);
 
-        if (_keepConstantHorizontalDistanceFromTarget)
+
+        if (_horizontalPositionMode == CameraHorizontalPositionMode.ImitatingTargetDistanceFromCenter)
+        {
+            cameraHorizontalPosition = cameraHorizontalPosition.normalized * Mathf.Clamp( positionMagnitude, _horizontalDistanceRange.x, _horizontalDistanceRange.y);
+        }
+        else
         {
             var horizontalCenterToTarget = new Vector2(_target.position.x, _target.position.z) - new Vector2(_rotationCenter.position.x, _rotationCenter.position.z);
             var horizontalCenterToTargetDir = horizontalCenterToTarget.normalized;
-            cameraHorizontalPosition = new Vector2(_target.position.x, _target.position.z) - horizontalCenterToTargetDir * _constantHorizontalDistanceFromTarget;
+            cameraHorizontalPosition = new Vector2(_target.position.x, _target.position.z) - horizontalCenterToTargetDir * _horizontalDistanceRange[0];
         }
 
+        var cameraHeight = _constantHeight;
+        if (_heightMode == CameraHeightMode.DependingOnTargetDistanceFromCenter)
+        {
+            cameraHeight = _constantHeight + targetDistanceFromCenter * _heightByDistanceFactor;
+        }
 
-        Vector3 toTarget = (_rotationCenter.position - _target.transform.position).ToPlane();
-        transform.position = new Vector3(cameraHorizontalPosition.x, _cameraHeight, cameraHorizontalPosition.y) - toTarget.normalized * _backOffset;
+        transform.position = Vector3.Lerp(transform.position,
+            new Vector3(cameraHorizontalPosition.x, cameraHeight, cameraHorizontalPosition.y), _transpositionSpeed * Time.deltaTime);
 
-        transform.LookAt(_target);
+        var cameraToTargetDirection = (_target.position - _camera.transform.position).normalized;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(cameraToTargetDirection), _rotationSpeed*Time.deltaTime);
 
         if (_changeFovByDistanceToTarget)
         {
             var distance = Vector3.Distance(_target.position, transform.position);
             _camera.fieldOfView = _fovMultiplier / Mathf.Pow(distance, 0.66f);
         }
+    }
+
+    public enum CameraHeightMode
+    {
+        Constant=0, DependingOnTargetDistanceFromCenter=1
+    }
+
+    public enum CameraHorizontalPositionMode
+    {
+        ConstantDistanceFromTarget=0, ImitatingTargetDistanceFromCenter=1
     }
 }
