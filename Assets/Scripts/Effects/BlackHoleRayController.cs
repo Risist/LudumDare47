@@ -24,6 +24,8 @@ namespace Assets.Scripts.Effects
 
         void Update()
         {
+            if (!_fish)
+                return;
             _particleRenderer.enabled = _blackHolePullCollider.enabled && _blackHolePullCollider.gameObject.activeInHierarchy;
 
             var startPos = _fish.transform.position;

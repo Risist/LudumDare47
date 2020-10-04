@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2671746861849979718
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,6 +1103,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8999462424803128034}
     m_Modifications:
+    - target: {fileID: 6344954374837182074, guid: 789dd0216b6ed4f409c578e859751df2,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: -12.282001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344954374837182074, guid: 789dd0216b6ed4f409c578e859751df2,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: -13.755
+      objectReference: {fileID: 0}
     - target: {fileID: 7728585096204816101, guid: 789dd0216b6ed4f409c578e859751df2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1184,9 +1194,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8999462424803128034}
     m_Modifications:
+    - target: {fileID: 1839521977, guid: 572ecc63c1afeee40bba18a7d3214dcf, type: 3}
+      propertyPath: forceMax
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839521977, guid: 572ecc63c1afeee40bba18a7d3214dcf, type: 3}
+      propertyPath: force
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839521977, guid: 572ecc63c1afeee40bba18a7d3214dcf, type: 3}
+      propertyPath: sideForce
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1839521978, guid: 572ecc63c1afeee40bba18a7d3214dcf, type: 3}
       propertyPath: m_Radius
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8676726859998935301, guid: 572ecc63c1afeee40bba18a7d3214dcf,
         type: 3}

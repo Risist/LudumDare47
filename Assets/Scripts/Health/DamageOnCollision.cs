@@ -28,12 +28,12 @@ public class DamageOnCollision : MonoBehaviour
         if ((requiredMask.value & (1 << other.gameObject.layer)) == 0)
             return;
 
-        var damagable = other.GetComponent<IDamageable>();
+        var damagable = other.GetComponentInParent<IDamageable>();
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
 
-        if (damagable != null && other.transform.root != transform.root)
+        if (damagable != null)// && other.transform.root != transform.root)
         {
             damagable.DealDamage(damageDataContinous);
             if (AttemptToDamage(damagable))
@@ -48,12 +48,12 @@ public class DamageOnCollision : MonoBehaviour
         if ((requiredMask.value & (1 << other.gameObject.layer)) == 0)
             return;
 
-        var damagable = other.GetComponent<IDamageable>();
+        var damagable = other.GetComponentInParent<IDamageable>();
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
 
-        if (damagable != null && other.transform.root != transform.root)
+        if (damagable != null)// && other.transform.root != transform.root)
         {
             damagable.DealDamage(damageDataEnter);
             if (AttemptToDamage(damagable))
@@ -69,16 +69,12 @@ public class DamageOnCollision : MonoBehaviour
         if ((requiredMask.value & (1 << collision.gameObject.layer)) == 0)
             return;
 
-        var damagable = collision.gameObject.GetComponent<IDamageable>();
-        if (damagable == null)
-        {
-            damagable = collision.gameObject.GetComponentInParent<IDamageable>();
-        }
+        var damagable = collision.gameObject.GetComponentInParent<IDamageable>();
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
         
-        if (damagable != null && collision.gameObject.transform.root != transform.root)
+        if (damagable != null)// && collision.gameObject.transform.root != transform.root)
         {
             DamageData damageDataImpactTemp = new DamageData();
             damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
@@ -100,15 +96,11 @@ public class DamageOnCollision : MonoBehaviour
         if ((requiredMask.value & (1 << collision.gameObject.layer)) == 0)
             return;
 
-        var damagable = collision.gameObject.GetComponent<IDamageable>();
-        if (damagable == null)
-        {
-            damagable = collision.gameObject.GetComponentInParent<IDamageable>();
-        }
+        var damagable = collision.gameObject.GetComponentInParent<IDamageable>();
         damageDataEnter.position = transform.position;
         damageDataContinous.position = transform.position;
         damageDataOnce.position = transform.position;
-        if (damagable != null && collision.gameObject.transform.root != transform.root)
+        if (damagable != null )//&& collision.gameObject.transform.root != transform.root)
         {
             DamageData damageDataImpactTemp = new DamageData();
             damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;

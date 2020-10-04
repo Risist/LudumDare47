@@ -139,7 +139,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.8
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.8}
 --- !u!120 &6344954374837182074
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -264,13 +264,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd49d5feb5f2d744b89cde650e70f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tongueSpeedFactor: 0.925
-  tongueSpeedFactorBack: 0.925
+  tongueSpeedFactor: 0.91
+  tongueSpeedFactorBack: 0.91
   pullForce: 15
   objectPullForce: 0
-  maxReach: 7.5
+  maxReach: 5
   backDistanceTollerance: 0.75
   _myRigidbody: {fileID: 2072769294}
+  currentState: 0
 --- !u!1 &2075786117
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +433,7 @@ MonoBehaviour:
   directionAxisCodeY: Mouse Y
   keyAxisCode:
   - Fire1
+  - Fire2
 --- !u!65 &6705664713498330390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -493,6 +495,7 @@ GameObject:
   - component: {fileID: 2072769293}
   - component: {fileID: 2072769296}
   - component: {fileID: 8763027949989057209}
+  - component: {fileID: 9158393157370504940}
   m_Layer: 9
   m_Name: Fish
   m_TagString: Player
@@ -660,6 +663,26 @@ MonoBehaviour:
   damageDataImpact:
     damage: 1
     staggerIncrease: 0
+--- !u!114 &9158393157370504940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7728585096204816106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  thresholdDamageAmountToReact: 0
+  destroyOnDeath: 1
+  tResetStagger:
+    cd: 1
+  staggerLimit: 0
+  staggerLevel: 0
 --- !u!1001 &985303820673336207
 PrefabInstance:
   m_ObjectHideFlags: 0

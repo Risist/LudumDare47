@@ -345,7 +345,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -698,6 +698,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayObjectsRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 0.99599993
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].z
+      value: -12.282001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 0.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631523214623702026, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: -13.755
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731689261542781676, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -852,6 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1129943543}
   - component: {fileID: 1129943542}
+  - component: {fileID: 1129943544}
   m_Layer: 0
   m_Name: WaterReflectionSceneCamera
   m_TagString: Untagged
@@ -909,13 +935,22 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129943541}
-  m_LocalRotation: {x: 0.16307773, y: 0.0005685911, z: 0.00003801682, w: -0.9866131}
-  m_LocalPosition: {x: -6.5366263, y: -1.8552094, z: -15.511366}
+  m_LocalRotation: {x: 0.14971007, y: -0.055178456, z: -0.0048103444, w: -0.9871774}
+  m_LocalPosition: {x: -81.03691, y: -65.417244, z: -210.37354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!45 &1129943544
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129943541}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1 &1173803921
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1024,90 @@ MonoBehaviour:
   _floorParent: {fileID: 1964104507}
   _floorCellPrefab: {fileID: 8091523084396920940, guid: 9519ed88a1547c3438dfb0e6aca92775,
     type: 3}
+--- !u!1 &1368658298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1368658301}
+  - component: {fileID: 1368658300}
+  - component: {fileID: 1368658299}
+  m_Layer: 0
+  m_Name: WaterReflectionSceneCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!45 &1368658299
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368658298}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
+--- !u!20 &1368658300
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368658298}
+  m_Enabled: 0
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_projectionMatrixMode: 0
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967279
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1368658301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368658298}
+  m_LocalRotation: {x: 0.14971007, y: -0.055178456, z: -0.0048103444, w: -0.9871774}
+  m_LocalPosition: {x: -81.03691, y: -65.417244, z: -210.37354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763421188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2667574624738312984, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,

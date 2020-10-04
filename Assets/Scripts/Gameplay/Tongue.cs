@@ -12,14 +12,17 @@ public class Tongue : MonoBehaviour
     public Rigidbody _myRigidbody;
     Rigidbody _otherRigidbody;
     InputHolder _inputHolder;
-    enum EState
+    Collider _collider;
+    float initialY;
+
+    public enum EState
     {
         EIdle,
         EMoveForward,
         EMoveBackward,
         EPull
     }
-    EState currentState = EState.EIdle;
+    public EState currentState = EState.EIdle;
     bool inIdle;
 
     Vector3 _pullPosition;
@@ -28,15 +31,20 @@ public class Tongue : MonoBehaviour
     private void Start()
     {
         _inputHolder = GetComponentInParent<InputHolder>();
+        _collider = GetComponentInParent<Collider>();
+        initialY = transform.localPosition.y;
         InitIdle();
     }
 
+    bool pressed = false;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (_inputHolder.keys[1])
         {
-            InitMoveForward();
+            if(!pressed)
+                InitMoveForward();
         }
+        pressed = _inputHolder.keys[1];
     }
 
     private void FixedUpdate()
@@ -64,17 +72,19 @@ public class Tongue : MonoBehaviour
     {
         currentState = EState.EIdle;
         transform.localPosition = Vector3.zero;
+        _collider.enabled = false;
     }
     public void InitMoveBackward()
     {
         if (currentState == EState.EIdle)
             return;
-        if (transform.localPosition.magnitude <= 0.1f)
+        if (transform.localPosition.ToPlane().magnitude <= 0.1f)
             InitIdle();
         else if(!inIdle)
         {
             currentState = EState.EMoveBackward;
         }
+        _collider.enabled = false;
     }
     public void InitMoveForward()
     {
@@ -83,6 +93,7 @@ public class Tongue : MonoBehaviour
         
 
         currentState = EState.EMoveForward; 
+        _collider.enabled = true;
     }
     public void InitPull(Rigidbody otherRigidbody)
     {
@@ -92,6 +103,7 @@ public class Tongue : MonoBehaviour
         _pullPosition = transform.position;
         currentState = EState.EPull;
         tPull.Restart();
+        _collider.enabled = true;
     }
 
 
@@ -101,7 +113,7 @@ public class Tongue : MonoBehaviour
     }
     void MoveForward()
     {
-        var dist = (transform.localPosition - new Vector3(0, 0, maxReach)).magnitude;
+        var dist = (transform.localPosition - new Vector3(0, 0, maxReach)).ToPlane().magnitude;
         if (dist < backDistanceTollerance)
         {
             _inputHolder.rotationInput = Vector2.zero;
@@ -110,6 +122,7 @@ public class Tongue : MonoBehaviour
         }
         _inputHolder.rotationInput = _inputHolder.directionInput;
         transform.localPosition = Vector3.Lerp(new Vector3(0, 0, maxReach), transform.localPosition, tongueSpeedFactor);
+        transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
     }
     void MoveBackward()
     {
@@ -118,7 +131,7 @@ public class Tongue : MonoBehaviour
     void Pull()
     {
         var dist = (transform.localPosition - new Vector3(0, 0, 0)).magnitude;
-        if (!Input.GetKey(KeyCode.Mouse1) || dist < backDistanceTollerance || tPull.IsReady()  )
+        if ( !_inputHolder.keys[1] && (dist < backDistanceTollerance || tPull.IsReady()) )
         {
             InitMoveBackward();
             return;
@@ -133,6 +146,7 @@ public class Tongue : MonoBehaviour
             toTongue = _pullPosition - _otherRigidbody.position;
             _myRigidbody.AddForce(toTongue * objectPullForce);
         }
+        transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
     }
 
     private void OnTriggerStay(Collider other)

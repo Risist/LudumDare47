@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PullInto : MonoBehaviour
 {
+    public float forceMax = float.PositiveInfinity;
     public float force;
     public float sideForce;
     private void OnTriggerStay(Collider other)
@@ -11,6 +12,10 @@ public class PullInto : MonoBehaviour
             return;
 
         Vector3 into = transform.position - other.attachedRigidbody.position;
-        other.attachedRigidbody.AddForce(into * force + new Vector3(-into.z, into.y, into.x)*sideForce );
-        }
+
+        float f = Mathf.Clamp(into.magnitude, 0, forceMax);
+        other.attachedRigidbody.AddForce(into.normalized * f * force + new Vector3(-into.z, into.y, into.x).normalized* f * sideForce );
+
+
+    }
 }
