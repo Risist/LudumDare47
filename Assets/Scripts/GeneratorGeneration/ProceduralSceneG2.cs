@@ -10,6 +10,7 @@ namespace Assets.Scripts.GeneratorGeneration
     [DefaultExecutionOrder(-999999999)]
     public class ProceduralSceneG2 : MonoBehaviour
     {
+        [SerializeField] private GameObject _waterTile;
         [SerializeField] private RandomGeneratorSingleton _random;
         [SerializeField] private ProceduralSceneGenerator _sceneGenerator;
         [SerializeField] private Vector2 _floorWidgetsCountRange;
@@ -80,6 +81,8 @@ namespace Assets.Scripts.GeneratorGeneration
 
             _sceneGenerator._floorSize = new Vector2Int(_random.RandomInt(_floorSizeRange.x ,_floorSizeRange.y), _random.RandomInt(_floorSizeRange.x ,_floorSizeRange.y) );
             _sceneGenerator.Generate();
+
+            _waterTile.transform.localScale = new Vector3(_sceneGenerator._floorSize.x * 0.02985f, 1, _sceneGenerator._floorSize.y*0.02985f);
         }
 
         private void RandomizeCrossLineWidget(CrossLineWidget widget)
