@@ -583,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 8258693862428124490}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.11353691, z: 0}
-  m_LocalScale: {x: 0.23653524, y: 0.23653524, z: 0.23653524}
+  m_LocalScale: {x: 0.7096056, y: 0.7096056, z: 0.7096056}
   m_Children:
   - {fileID: 7362508466786637584}
   - {fileID: 4951926393208926844}
@@ -601,6 +601,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6341159766071628594, guid: 2e64375e0f39242469e2a9a08298e043,
+        type: 3}
+      propertyPath: _particleSizeMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7180432159430663894, guid: 2e64375e0f39242469e2a9a08298e043,
         type: 3}
       propertyPath: m_LocalPosition.x

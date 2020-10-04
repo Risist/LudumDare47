@@ -24,11 +24,6 @@ public class SingleWallWidget : WallGenerationWidget
         {
             var p1 = points[i];
             var p2 = points[i+1];
-            if (p1.x == 23 && p1.y == 33)
-            {
-                int todo = 22;
-            }
-
 
             if (p1.x == p2.x)
             {

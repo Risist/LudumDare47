@@ -30,7 +30,7 @@ public class ProceduralPropsInstantiater : MonoBehaviour
                 {
                     var prop = GameObject.Instantiate(definition.Prefab, _propsParent);
                     prop.transform.localPosition =
-                        new Vector3(x, 0, y) - new Vector3(centerOffset.x, 0, centerOffset.y);
+                        new Vector3(x, 0, y) - new Vector3(centerOffset.x, 0, centerOffset.y) + new Vector3(definition.OffsetFromCenter.x, 0, definition.OffsetFromCenter.y);
                     prop.transform.localRotation = Quaternion.Euler(0, definition.Angle, 0);
 
                     prop.name = $"Prop-{x}-{y} - {definition.Prefab.name}";
