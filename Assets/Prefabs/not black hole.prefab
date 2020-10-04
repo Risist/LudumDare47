@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 8676726859998935303}
   - component: {fileID: 8676726859998935300}
   - component: {fileID: 8676726859998935301}
+  - component: {fileID: 4317510649254773616}
   m_Layer: 0
   m_Name: not black hole
   m_TagString: Untagged
@@ -153,6 +154,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4317510649254773616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8676726859998935306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4cf256bc7ddbd4397f3c8e11555e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blackHoleSphere: {fileID: 8676726859998935301}
+  _blackHoleSparklesPrefab: {fileID: 7258636619595794187, guid: f1569ad754361a14bbe02a6daaaabe1a,
+    type: 3}
 --- !u!1 &8676726860532944182
 GameObject:
   m_ObjectHideFlags: 0
