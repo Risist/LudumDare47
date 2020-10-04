@@ -781,37 +781,37 @@ PrefabInstance:
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22009924
+      value: -0.42261836
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.22747676
+      value: -0.000000032061344
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.052758843
+      value: -0.000000029349557
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9471152
+      value: 0.90630776
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.719131
+      value: -9.4
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.93528
+      value: 3.04
       objectReference: {fileID: 0}
     - target: {fileID: 6710425996092860943, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.450684
+      value: -19.78
       objectReference: {fileID: 0}
     - target: {fileID: 8999462424803128034, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
         type: 3}
@@ -995,6 +995,21 @@ MonoBehaviour:
   _floorParent: {fileID: 1964104507}
   _floorCellPrefab: {fileID: 8091523084396920940, guid: 9519ed88a1547c3438dfb0e6aca92775,
     type: 3}
+--- !u!1 &1488522516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2720025934004583474, guid: 907b4da1674549c4ca8f9d7e1a3ddc57,
+    type: 3}
+  m_PrefabInstance: {fileID: 1025813325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1488522519
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488522516}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1001 &1606491277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1123,13 +1138,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 885949060}
   _rotationCenter: {fileID: 236581917}
-  _cameraHeight: 200
+  _heightMode: 1
+  _constantHeight: 10
+  _heightByDistanceFactor: 1
+  _horizontalPositionMode: 1
+  _horizontalDistanceRange: {x: 50, y: 100}
+  _rotationSpeed: 4
+  _transpositionSpeed: 1
   _changeFovByDistanceToTarget: 1
-  _maximumCameraHorizontalDistanceFromCenter: 99999
   _fovMultiplier: 300
-  _keepConstantHorizontalDistanceFromTarget: 1
-  _constantHorizontalDistanceFromTarget: 300
-  _backOffset: 0
 --- !u!1 &1964104506
 GameObject:
   m_ObjectHideFlags: 0
