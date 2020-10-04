@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4205066684080930905}
   - component: {fileID: 4205066684080930902}
   - component: {fileID: 4205066684080930908}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: DebrisPiecePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   PositionOffsetFrequency: 0.2
   WaveFrequency: 0.5
   RoundingForce: 0.5
-  PullingForceFactor: 0
+  PullingForceFactor: 0.14
   MaximumSpeed: 10
 --- !u!96 &4205066684080930908
 TrailRenderer:
