@@ -13,6 +13,7 @@ public class ProceduralSceneGenerator : MonoBehaviour
     public  ProceduralWallsInstantiater _wallsInstantiater;
     public  ProceduralPropsGenerator _propsGenerator;
     public  ProceduralPropsInstantiater _propsInstantiater;
+    public DebrisPiecesGenerator _piecesGenerator;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class ProceduralSceneGenerator : MonoBehaviour
         _floorInstantiater.InstantiateFloor(floorSpecification, _floorSize);
         _wallsInstantiater.InstantiateWalls( new Vector2Int(floorSpecification.FloorPresenceArray.GetLength(0), floorSpecification.FloorPresenceArray.GetLength(1)), wallsSpecification);
         _propsInstantiater.InstantiateProps(propsSpecification);
+        _piecesGenerator.GeneratePieces(_floorSize);
         AstarPath.active?.Scan();
     }
 
