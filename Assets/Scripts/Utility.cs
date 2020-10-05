@@ -138,4 +138,9 @@ public static class Extensions
          v.y = (sin * tx) + (cos * ty);
          return v;
      }
+
+     public static Vector2 X_Z(this Vector3 @this)
+     {
+         return new Vector2(@this.x, @this.z);
+     }
 }

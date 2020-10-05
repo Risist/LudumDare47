@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &92659882303128557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5134079403671145353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24799ff9bf2afb1448a5e1582e7a7a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nEvents: 5
+  maxEventLifeTime: 2
+  velocityPredictionScale: 7.5
+  memorableMask:
+    serializedVersion: 2
+    m_Bits: 33280
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 257
+  trackEnemy: 0
+  trackAlly: 1
+  trackNeutrals: 0
+  coneAngle: 360
+  searchDistance: 20
 --- !u!114 &1610274609646680433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,32 +54,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviourPacks:
   - {fileID: 11400000, guid: 68c410236d5d1b542aa57e00d563d835, type: 2}
---- !u!114 &92659882303128557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5134079403671145353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24799ff9bf2afb1448a5e1582e7a7a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nEvents: 5
-  maxEventLifeTime: 2
-  velocityPredictionScale: 7.5
-  memorableMask:
-    serializedVersion: 2
-    m_Bits: 512
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 257
-  trackEnemy: 0
-  trackAlly: 1
-  trackNeutrals: 0
-  coneAngle: 170
-  searchDistance: 20
 --- !u!1001 &6255676995601865949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +221,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7182b1713c3b68e4ebf8e191da9b7a50, type: 2}
+    - target: {fileID: 9158393157370504940, guid: 789dd0216b6ed4f409c578e859751df2,
+        type: 3}
+      propertyPath: currentHealth
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 9158393157370504940, guid: 789dd0216b6ed4f409c578e859751df2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1969781388477802108, guid: 789dd0216b6ed4f409c578e859751df2, type: 3}
     - {fileID: 6705664713498330390, guid: 789dd0216b6ed4f409c578e859751df2, type: 3}

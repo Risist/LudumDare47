@@ -11,6 +11,8 @@ public class Tongue : MonoBehaviour
     public float backDistanceTollerance;
     public Rigidbody _myRigidbody;
     Rigidbody _otherRigidbody;
+    bool _hadRigidbody;
+
     InputHolder _inputHolder;
     Collider _collider;
     float initialY;
@@ -104,6 +106,7 @@ public class Tongue : MonoBehaviour
         currentState = EState.EPull;
         tPull.Restart();
         _collider.enabled = true;
+        _hadRigidbody = otherRigidbody;
     }
 
 
@@ -122,7 +125,7 @@ public class Tongue : MonoBehaviour
         }
         _inputHolder.rotationInput = _inputHolder.directionInput;
         transform.localPosition = Vector3.Lerp(new Vector3(0, 0, maxReach), transform.localPosition, tongueSpeedFactor);
-        transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
+        //transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
     }
     void MoveBackward()
     {
@@ -146,7 +149,11 @@ public class Tongue : MonoBehaviour
             toTongue = _pullPosition - _otherRigidbody.position;
             _myRigidbody.AddForce(toTongue * objectPullForce);
         }
-        transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
+        else if(_hadRigidbody)
+        {
+            InitMoveBackward();
+        }
+        //transform.localPosition = transform.localPosition.ToPlane() + Vector3.up * initialY;
     }
 
     private void OnTriggerStay(Collider other)

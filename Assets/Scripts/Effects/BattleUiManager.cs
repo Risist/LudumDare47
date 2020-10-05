@@ -21,6 +21,58 @@ namespace Assets.Scripts.Effects
         [SerializeField] private TMP_Text _gameWon;
         private string _playerName;
 
+        [Space]
+        public Transform idleCheckpoint;
+        public Transform speedUpCheckpoint;
+        public float checkpointDistance;
+
+        enum EState
+        {
+            EIdle,
+            ESpeedUp,
+            ECombat
+        }
+        EState currentState = EState.EIdle;
+
+        void InitStateIdle()
+        {
+            currentState = EState.EIdle;
+            _survive.text = "Lick the door by pressing right mouse button";
+        }
+        void InitStateSpeedUp()
+        {
+            currentState = EState.ESpeedUp;
+            _survive.text = "Left mouse button to glide";
+        }
+        void InitStateCombat()
+        {
+            currentState = EState.ECombat;
+            _survive.text = "Survive";
+        }
+
+        void CheckForStateChange()
+        {
+            var playerFish = FindObjectOfType<InputControllerMouseKeyboard>();
+            if (!playerFish)
+                return;
+
+            if (currentState == EState.EIdle)
+            {
+                float dist = (playerFish.transform.position - idleCheckpoint.position).ToPlane().magnitude;
+                if(dist < checkpointDistance)
+                {
+                    InitStateSpeedUp();
+                }
+            }else if(currentState == EState.ESpeedUp)
+            {
+                float dist = (playerFish.transform.position - speedUpCheckpoint.position).ToPlane().magnitude;
+                if (dist < checkpointDistance)
+                {
+                    InitStateCombat();
+                }
+            }
+        }
+
 
         void Start()
         {
@@ -30,10 +82,17 @@ namespace Assets.Scripts.Effects
             _playerName = yourName;
 
             _yourName.text = $"You are <i><color=green>{yourName}</i>";
+
+            InitStateIdle();
         }
 
         void Update()
         {
+            CheckForStateChange();
+
+            //if (currentState != EState.ECombat)
+            //    return;
+
             var playerFish = FindObjectOfType<InputControllerMouseKeyboard>();
             bool playerIsAlive = playerFish != null;
 

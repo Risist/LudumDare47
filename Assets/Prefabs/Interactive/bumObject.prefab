@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7951043948310022949}
   - component: {fileID: 1202472298099960253}
   - component: {fileID: 3831161308052262211}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: bumObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 15
-  maxHealth: 15
+  currentHealth: 1
+  maxHealth: 1
   thresholdDamageAmountToReact: 0
   destroyOnDeath: 1
   deparent: 0
@@ -129,7 +129,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 0.99999994
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

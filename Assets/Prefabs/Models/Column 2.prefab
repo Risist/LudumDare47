@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 9153312044075033704}
   - component: {fileID: 5116208242606222086}
   - component: {fileID: -3350758088807763943}
+  - component: {fileID: 177951945353934591}
   m_Layer: 0
   m_Name: Column 2
   m_TagString: Untagged
@@ -440,8 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 60
+  maxHealth: 60
   thresholdDamageAmountToReact: 0
   destroyOnDeath: 1
   deparent: 0
@@ -465,6 +466,24 @@ MonoBehaviour:
     type: 3}
   _destructionParticlesPrefab: {fileID: 4550776408872856077, guid: 3b8ac4c6a203e1d43bb9e97ccf2a0b3b,
     type: 3}
+--- !u!114 &177951945353934591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153312044075033705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b64669765aab944b20b2a73fb4b6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 100000
+  explosionRadius: 2
+  bodyDrag: 0
+  particleAliveTime: 2
+  fadeRatio: 1
+  preSelectMaterials: 1
 --- !u!1 &9153312044147024110
 GameObject:
   m_ObjectHideFlags: 0

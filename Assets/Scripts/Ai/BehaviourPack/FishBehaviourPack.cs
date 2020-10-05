@@ -27,13 +27,20 @@ namespace Ai
             stateAway
                 .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
-                .SetUtility(1.5f)
+                .SetUtility(2.5f)
                 .AddOnUpdate(() =>
             {
                 Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
                 Vector2 side = new Vector2(-away.y, away.x);
+                
 
-                inputHolder.positionInput = away + Random.insideUnitCircle * 4.25f;
+                inputHolder.positionInput = away + Random.insideUnitCircle * 0.25f;
+                if (obstacleFilter.GetTarget() != null)
+                {
+                    Vector2 toTarget = (obstacleFilter.GetTarget().position - transform.position).To2D();
+                    if(toTarget.magnitude < 5.0f)
+                        inputHolder.directionInput += -toTarget.normalized;
+                }
 
                 inputHolder.keys[0] = Random.value <= 0.1f;
 
@@ -54,13 +61,19 @@ namespace Ai
             stateSideFlow
                 .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
-                .SetUtility(1.75f)
+                .SetUtility(2.75f)
                 .AddOnUpdate(() =>
             {
                 Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
                 Vector2 side = new Vector2(-away.y, away.x);
 
-                inputHolder.positionInput = -side + Random.insideUnitCircle * 1.25f;
+                inputHolder.positionInput = side + Random.insideUnitCircle * 0.5f;
+                if (obstacleFilter.GetTarget() != null)
+                {
+                    Vector2 toTarget = (obstacleFilter.GetTarget().position - transform.position).To2D();
+                    if (toTarget.magnitude < 5.0f)
+                        inputHolder.directionInput += -toTarget.normalized;
+                }
 
                 inputHolder.keys[0] = Random.value <= 0.05f;
 
@@ -86,7 +99,13 @@ namespace Ai
                     Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
                     Vector2 side = new Vector2(-away.y, away.x);
 
-                    inputHolder.positionInput = side + Random.insideUnitCircle * 1.25f;
+                    inputHolder.positionInput = side + Random.insideUnitCircle * 0.75f;
+                    if (obstacleFilter.GetTarget() != null)
+                    {
+                        Vector2 toTarget = (obstacleFilter.GetTarget().position - transform.position).To2D();
+                        if (toTarget.magnitude < 5.0f)
+                            inputHolder.directionInput += toTarget.normalized;
+                    }
 
                     inputHolder.keys[0] = Random.value <= 0.05f;
 
@@ -106,13 +125,19 @@ namespace Ai
             stateInto
                 .AddOnBegin(() => tState.RestartRandom(0.5f, 0.75f))
                 .AddShallReturn(tState.IsReady)
-                .SetUtility(0.5f)
+                .SetUtility(0.125f)
                 .AddOnUpdate(() =>
                 {
                     Vector2 away = (transform.position - fishReferences.center.position).To2D().normalized;
                     Vector2 side = new Vector2(-away.y, away.x);
 
                     inputHolder.positionInput = -side + Random.insideUnitCircle * 1.25f;
+                    if (obstacleFilter.GetTarget() != null)
+                    {
+                        Vector2 toTarget = (obstacleFilter.GetTarget().position - transform.position).To2D();
+                        if (toTarget.magnitude < 5.0f)
+                            inputHolder.directionInput += -toTarget.normalized;
+                    }
 
                     inputHolder.keys[0] = Random.value <= 0.05f;
 

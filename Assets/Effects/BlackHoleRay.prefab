@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2886970202761371959}
   - component: {fileID: 2886970202775528567}
   - component: {fileID: 2886970202775559639}
+  - component: {fileID: 1605378034025181165}
   m_Layer: 0
-  m_Name: BlackHoleLine
+  m_Name: BlackHoleRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4691,3 +4692,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1605378034025181165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886970202761542935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecc3461a02c84649aa72db60e213898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blackHole: {fileID: 0}
+  _blackHolePullCollider: {fileID: 0}
+  _fish: {fileID: 0}
+  _particle: {fileID: 2886970202775528567}
+  _particleRenderer: {fileID: 2886970202775559639}
+  _zm: 2.6

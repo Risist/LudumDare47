@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d499bf9d09ad08a47b31165dc15a339c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d499bf9d09ad08a47b31165dc15a339c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -323,9 +323,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.6792453, g: 0.29936227, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 20
+  m_Color: {r: 0.94509804, g: 0.5274828, b: 0.0745098, a: 1}
+  m_Intensity: 2
+  m_Range: 25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -463,7 +463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d499bf9d09ad08a47b31165dc15a339c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: 7236927848176750327}
   - component: {fileID: -4916791691711613410}
   - component: {fileID: 6925651802948246647}
+  - component: {fileID: -3557696732344257840}
   m_Layer: 0
   m_Name: fiery snitch
   m_TagString: Untagged
@@ -524,7 +525,7 @@ Transform:
   m_GameObject: {fileID: 4217961068978009514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.763191, y: 0, z: -4.1505227}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.37762144, y: 0.37762144, z: 0.37762144}
   m_Children:
   - {fileID: 7984855094746324735}
   - {fileID: 6829183175708507770}
@@ -571,6 +572,24 @@ MonoBehaviour:
     type: 3}
   _destructionParticlesPrefab: {fileID: 4550776408872856077, guid: 3b8ac4c6a203e1d43bb9e97ccf2a0b3b,
     type: 3}
+--- !u!114 &-3557696732344257840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217961068978009514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b64669765aab944b20b2a73fb4b6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 100000
+  explosionRadius: 2
+  bodyDrag: 0
+  particleAliveTime: 2
+  fadeRatio: 1
+  preSelectMaterials: 1
 --- !u!1 &5858113171329602326
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +680,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d499bf9d09ad08a47b31165dc15a339c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

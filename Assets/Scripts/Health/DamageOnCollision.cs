@@ -77,10 +77,19 @@ public class DamageOnCollision : MonoBehaviour
         if (damagable != null)// && collision.gameObject.transform.root != transform.root)
         {
             DamageData damageDataImpactTemp = new DamageData();
-            damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
+
+            var collideeNormal = collision.GetContact(0).normal;
+            var ourRigidbody = this.GetComponent<Rigidbody>();
+            var collisionDirectionFactor = 1f;
+            if (ourRigidbody != null)
+            {
+                collisionDirectionFactor = Mathf.Clamp01(Vector2.Dot(ourRigidbody.velocity.X_Z().normalized, collideeNormal.X_Z().normalized));
+            }
+
+            damageDataImpactTemp.damage = collisionDirectionFactor*(damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage);
             damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
             damageDataImpactTemp.position = transform.position;
-            damageDataImpactTemp.direction = collision.GetContact(0).normal;
+            damageDataImpactTemp.direction = collideeNormal;
 
             damagable.DealDamage(damageDataImpactTemp);
 
@@ -103,10 +112,20 @@ public class DamageOnCollision : MonoBehaviour
         if (damagable != null )//&& collision.gameObject.transform.root != transform.root)
         {
             DamageData damageDataImpactTemp = new DamageData();
-            damageDataImpactTemp.damage = damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage;
+            var collideeNormal = collision.GetContact(0).normal;
+
+            var ourRigidbody = this.GetComponent<Rigidbody>();
+            var collisionDirectionFactor = 1f;
+            if (ourRigidbody != null)
+            {
+                collisionDirectionFactor = Mathf.Clamp01(Vector2.Dot(ourRigidbody.velocity.X_Z().normalized, collideeNormal.X_Z().normalized));
+            }
+
+            damageDataImpactTemp.damage =
+                collisionDirectionFactor * (damageDataImpact.damage * collision.relativeVelocity.magnitude + damageDataContinous.damage);
             damageDataImpactTemp.staggerIncrease = damageDataImpact.staggerIncrease * collision.relativeVelocity.magnitude + damageDataContinous.staggerIncrease;
             damageDataImpactTemp.position = transform.position;
-            damageDataImpactTemp.direction = collision.GetContact(0).normal;
+            damageDataImpactTemp.direction = collideeNormal;
 
             damagable.DealDamage(damageDataImpactTemp);
             if (AttemptToDamage(damagable))

@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 382c737ab1c487646bd35e5149cb0438, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,7 +152,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 382c737ab1c487646bd35e5149cb0438, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -245,7 +245,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 382c737ab1c487646bd35e5149cb0438, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 3197476438908952613}
   - component: {fileID: -7257540167709369399}
   - component: {fileID: -3082256139869032}
+  - component: {fileID: 8371785894669873074}
   m_Layer: 0
   m_Name: small rock
   m_TagString: Untagged
@@ -327,8 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0f65a6838b398409a1cc7d13d378c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 1000
+  maxHealth: 1000
   thresholdDamageAmountToReact: 0
   destroyOnDeath: 1
   deparent: 0
@@ -352,6 +353,24 @@ MonoBehaviour:
     type: 3}
   _destructionParticlesPrefab: {fileID: 4550776408872856077, guid: 3b8ac4c6a203e1d43bb9e97ccf2a0b3b,
     type: 3}
+--- !u!114 &8371785894669873074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3921032782910724212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b64669765aab944b20b2a73fb4b6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 100000
+  explosionRadius: 2
+  bodyDrag: 0
+  particleAliveTime: 2
+  fadeRatio: 1
+  preSelectMaterials: 1
 --- !u!1 &8698624979737837796
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +430,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 382c737ab1c487646bd35e5149cb0438, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
