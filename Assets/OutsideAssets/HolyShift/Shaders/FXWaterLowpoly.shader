@@ -52,6 +52,7 @@ Properties {
 	_WhirlIntensity("WhirlIntensity",Range(0,6)) = 2.0
 	_OutsideWhirlSpeed("OutsideWhirlSpeed", Range(0,2)) = 0.1
 	_WhirlShapeFactor("WhirlShapeFactor", Range(0,10)) = 4
+	_IsWhirlwind("IsWhirlwind", Range(0,1)) = 0
 }
 
 
@@ -248,6 +249,7 @@ float invLerpClamped(float from, float to, float value){
 		return o;
 	}
 
+	float _IsWhirlwind;
 
 	half4 frag( v2f i ) : SV_Target
 	{
@@ -255,6 +257,17 @@ float invLerpClamped(float from, float to, float value){
 		float whirlIntensity = _WhirlIntensity;
 		float distanceToCenterUv = length(i.tileUv);
 		float whirlwindStrength = invLerpClamped( whirlwindSize, 0, distanceToCenterUv);
+
+		float whirlwindStrengthXX = invLerpClamped( whirlwindSize*1, 0, distanceToCenterUv);
+
+		bool iw = _IsWhirlwind > 0.5;
+		bool iws = whirlwindStrengthXX > 0.5;
+
+
+
+		if(iw != iws){
+			discard;
+		}
 
 		float cycle = 3.14159*2;
 		float byTimePhaseA = fmod(_Time.z,cycle);
@@ -497,9 +510,9 @@ Subshader
 	
 	Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
-			ZTest LEqual
+			ZTest Less
 			ZWrite On
-			Cull Off
+			Cull Back
 		
 			CGPROGRAM
 		
